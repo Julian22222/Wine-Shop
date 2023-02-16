@@ -38,7 +38,7 @@ function App() {
           {/* <SearchBar /> */}
           <NavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/Wine-Shop" element={<Home />} />
             <Route path="/wines/:type/:id" element={<SingleCard />} />
             <Route
               path="/basket"

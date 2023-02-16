@@ -37,6 +37,11 @@ body {
   margin-left: 5em;
 }
 
+.Wine-logo {
+  height: 10%;
+  width: 100%;
+}
+
 .basketItems {
   text-align: center;
   display: flex;
