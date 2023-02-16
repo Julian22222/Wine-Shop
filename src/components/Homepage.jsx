@@ -9,7 +9,7 @@ const Homepage = () => {
       <img
         src="https://www.winemag.com/wp-content/themes/TrellisFoundation-child/assets/img/toplists_header.jpg"
         alt="wines are standing in a row"
-        width="1680"
+        width="1650"
         height="300"
       />
       <h1 className="Header">Best Wine Shop</h1>
