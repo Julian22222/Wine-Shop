@@ -62,7 +62,7 @@ const Home = () => {
         {value.wineList.map((item) => {
           return (
             <Link to={`/wines/${value.wineType}/${item.id}`} className="Border">
-              <button onClick={handleCard}>
+              <button onClick={handleCard} className="single">
                 <li key={(item.wine, item.id)}>
                   <WineCard
                     winery={item.winery}
