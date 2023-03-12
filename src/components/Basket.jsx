@@ -5,6 +5,8 @@ import WineCard from "./WineCard";
 import RemoveItem from "./RemoveItem";
 
 const Basket = () => {
+  const [numStart, setNumStart] = useState(1);
+
   const value = useContext(Context);
   // console.log(value);
   // console.log(value.basketList);
@@ -17,7 +19,11 @@ const Basket = () => {
     setMsgSendOrder(true);
   };
 
-  let num = 1;
+  // let numStart = 1;
+
+  const handleClick = (num) => {
+    setNumStart(numStart + num);
+  };
 
   return (
     <div className="Basket">
@@ -38,9 +44,22 @@ const Basket = () => {
                 image={item.image}
                 id={item.id}
               />
-              <p>quantity: {num}</p>
-
               <RemoveItem item={item} />
+              <p className="Quantity">Quantity:</p>
+              <br />
+              <p className="QuantityNum">{numStart}</p>
+              <div className="QuantityBtn-container">
+                <button
+                  disabled={numStart === 0}
+                  className="QuantityBtn"
+                  onClick={() => handleClick(-1)}
+                >
+                  -
+                </button>
+                <button className="QuantityBtn" onClick={() => handleClick(1)}>
+                  +
+                </button>
+              </div>
             </li>
           );
         })}
