@@ -1,0 +1,26 @@
+.qty-container {
+  margin-bottom: 30px;
+  margin-left: 70%;
+}
+
+.RemoveItem:hover,
+.ButtonForCard:hover {
+  cursor: pointer;
+}
+
+.ButtonForCard {
+  margin-left: 5px;
+  padding: 2px 5px;
+  padding: 10px;
+}
+
+.input-number {
+  width: 60px;
+  /* padding: 5px; */
+  font-size: 20px;
+  height: 35px;
+}
+
+.qty-text {
+  font-size: 20px;
+}

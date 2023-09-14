@@ -1,77 +1,132 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Context from "./Context";
 import { useContext } from "react";
-import WineCard from "./WineCard";
 import RemoveItem from "./RemoveItem";
 
 const Basket = () => {
-  const [numStart, setNumStart] = useState(1);
+  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const [updateQty, setUpdateQty] = useState(0);
 
   const value = useContext(Context);
-  // console.log(value);
-  // console.log(value.basketList);
-  // console.log(value.basketList.wine);
 
-  const [msgSendOrder, setMsgSendOrder] = useState(false);
+  // const [msgSendOrder, setMsgSendOrder] = useState(false);
+
+  useEffect(() => {}, [count, total, updateQty]);
 
   const hadleOrder = () => {
     value.setBasketList([]);
-    setMsgSendOrder(true);
   };
+  //////////////////////////////////////////////////////////////////////////////
+  // const handleAddQty = (num, itemQty, itemPrice) => {
+  //   setCount(count + num);
+  //   setTotal(Number(total) + Number(itemPrice.slice(1)));
+  // };
 
-  // let numStart = 1;
-
-  const handleClick = (num) => {
-    setNumStart(numStart + num);
+  const handleremoveQty = (num, itemQty, itemPrice) => {
+    setCount(count + num);
+    setTotal(total - Number(itemPrice.slice(1)));
   };
 
   return (
     <div className="Basket">
       <h1>My Basket</h1>
       <p className="TotalBasket">
-        Total items in my basket: {value.basketList.length}
+        Amount of different items in my basket: {value.basketList.length}
       </p>
       <ul>
         {value.basketList.map((item) => {
           return (
             <li key={(item.id, item.image)} className="basketItems">
-              <WineCard
-                winery={item.winery}
-                wine={item.wine}
-                rating={item.rating.average}
-                reviews={item.rating.reviews}
-                location={item.location}
-                image={item.image}
-                id={item.id}
-              />
+              <Link to={`/wines/${item._id}`} className="Border">
+                <button className="single-btn-basket">
+                  <div className="card">
+                    <img
+                      src={item.image}
+                      alt="different wines"
+                      width="100"
+                      height="221"
+                      className="card-img"
+                    />
+                  </div>
+                </button>
+              </Link>
+
               <RemoveItem item={item} />
+              <p>{item.price} per bottle</p>
               <p className="Quantity">Quantity:</p>
               <br />
-              <p className="QuantityNum">{numStart}</p>
+              {/* <p className="QuantityNum">{Number(item.qty) + Number(count)}</p> */}
+              <p className="QuantityNum">{Number(item.qty)}</p>
               <div className="QuantityBtn-container">
                 <button
-                  disabled={numStart === 0}
                   className="QuantityBtn"
-                  onClick={() => handleClick(-1)}
+                  // 2 functions within onCLick block
+                  onClick={(event) => {
+                    item.qty--;
+                    setUpdateQty((prevState) => {
+                      prevState--;
+                    });
+                    console.log(updateQty);
+                  }}
                 >
                   -
                 </button>
-                <button className="QuantityBtn" onClick={() => handleClick(1)}>
+
+                {/* <button
+                  disabled={Number(item.qty) + Number(count) === 0}
+                  className="QuantityBtn"
+                  onClick={() => handleremoveQty(-1, item.qty, item.price)}
+                >
+                  -
+                </button> */}
+
+                {/* ///////////////////////////////////////////////////////////////////// */}
+
+                {/* <button
+                  className="QuantityBtn"
+                  onClick={() => handleAddQty(1, item.qty, item.price)}
+                >
+                  +
+                </button> */}
+
+                <button
+                  className="QuantityBtn"
+                  // 2 functions within onCLick block
+                  onClick={(event) => {
+                    item.qty++;
+                    setUpdateQty((prevState) => {
+                      prevState++;
+                    });
+                    console.log(updateQty);
+                  }}
+                >
                   +
                 </button>
+              </div>
+              <div>
+                <p className="totalPrice-forThisTypeOfWine">
+                  Total:{" "}
+                  {(
+                    Number(item.qty) * Number(item.price.slice(1)) +
+                    Number(total)
+                  ).toFixed(2)}
+                </p>
               </div>
             </li>
           );
         })}
       </ul>
       {value.basketList.length > 0 ? (
-        <button className="OrderBtn" onClick={hadleOrder}>
-          Order
-        </button>
+        <Link to="/checkout">
+          <button className="OrderBtn" onClick={hadleOrder}>
+            Checkout
+          </button>
+        </Link>
       ) : null}
-      {msgSendOrder ? (
-        <p className="MsgOrderHasBeenSent">your order has been sent</p>
-      ) : null}
+
       {/* <p> button Order appears when basketList.length more than 0 </p>
       <p>when you click on Order button - basketList - become empty, show message your order has been sent</p> */}
     </div>

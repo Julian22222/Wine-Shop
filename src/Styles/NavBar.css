@@ -1,0 +1,22 @@
+.NaviBar {
+  font-size: 18px;
+  text-transform: uppercase;
+  /* display: flex; */
+  background-color: #ccc;
+  height: 60px;
+}
+
+.NavBar {
+  color: white;
+  list-style-type: none;
+  /* display: flex; */
+  color: black;
+  margin-right: 25px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: flex-end;
+}

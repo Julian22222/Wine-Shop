@@ -1,0 +1,76 @@
+.Basket {
+  /* text-align: center; */
+  height: 100vh;
+  margin-left: 100px;
+}
+
+.TotalBasket {
+  text-align: left;
+}
+
+.basketItems {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 4px 4px 0 rgba(248, 239, 239, 0.2);
+  transition: 0.3s;
+  margin: 10px;
+  width: 45em;
+  height: 15em;
+}
+
+.Quantity {
+  margin-top: 70px;
+  margin-right: 5px;
+  /* border-color: red; */
+  font-size: 20px;
+}
+
+.QuantityNum {
+  margin-top: 100px;
+  margin-left: -10%;
+  margin-right: 5px;
+  font-size: 25px;
+}
+
+.QuantityBtn-container {
+  margin-top: 8%;
+  margin-left: 6%;
+  margin-right: 5px;
+  font-size: 25px;
+}
+
+.QuantityBtn {
+  padding: 5px;
+  width: 25px;
+  margin-top: 50px;
+}
+
+.OrderBtn {
+  margin-left: 50em;
+  width: 150px;
+  border: 2px solid black;
+  background-color: white;
+  color: red;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.totalPrice-forThisTypeOfWine {
+  margin-left: 30px;
+  text-decoration: underline;
+}
+
+.MsgOrderHasBeenSent {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
+.single-btn-basket {
+  background-color: transparent;
+  border: transparent;
+  margin-top: -10px;
+}

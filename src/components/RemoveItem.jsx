@@ -24,7 +24,7 @@ const RemoveItem = (props) => {
   return (
     <div>
       <button onClick={() => handleRemove(item)} className="RemoveItem">
-        remove item
+        Remove item
       </button>
     </div>
   );

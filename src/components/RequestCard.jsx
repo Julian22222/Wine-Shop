@@ -1,9 +1,14 @@
 const RequestCard = (props) => {
   return (
     <div className="RequestCard">
-      <p>User: {props.user_name}</p>
-      <p>City / Region.: {props.regionDetails}</p>
-      <p>Client comment: {props.comments}</p>
+      <span style={{ color: "#ccc" }}>User : </span>
+      <span>{props.user_name}</span>
+      <br />
+      <span style={{ color: "#ccc" }}>City / Region :</span>
+      <span> {props.regionDetails}</span>
+      <br />
+      <span style={{ color: "#ccc" }}>Client comment:</span>
+      <span> {props.comments}</span>
     </div>
   );
 };

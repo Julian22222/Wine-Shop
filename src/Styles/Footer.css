@@ -1,0 +1,53 @@
+.footer-block {
+  background-color: blanchedalmond;
+  width: 100%;
+  height: 250px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.first-block-footer {
+  flex-basis: 25%;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.second-block-footer {
+  margin-top: 40px;
+  flex-basis: 25%;
+}
+
+.third-block-footer {
+  flex-basis: 25%;
+  margin-top: 20px;
+}
+
+.fourth-block-footer {
+  flex-basis: 25%;
+  margin-top: 20px;
+}
+
+.footer-head {
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.masterCard,
+.payPal,
+.applePay,
+.googlePay,
+.visa,
+.amex {
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.email,
+.meta,
+.x,
+.instagram,
+.youtube,
+.tiktok {
+  margin-right: 20px;
+  margin-top: 30px;
+}
