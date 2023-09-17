@@ -35,15 +35,6 @@
   margin-top: 50px;
 }
 
-.SingleCardMsgBasket {
-  position: absolute;
-  margin-top: -600px;
-  margin-left: 65%;
-  color: red;
-  font-weight: 500;
-  /* font-size: 10px; */
-}
-
 .singleCard-others-buying {
   display: flex;
   justify-content: center;
@@ -80,10 +71,12 @@
 }
 
 .button-singleCard {
+  position: absolute;
   /* display: flex;
   justify-content: center; */
-  margin-left: 85%;
-  /* margin-top: -30px; */
+  /* margin-left: 85%; */
+  margin-left: 480px;
+  margin-top: -37px;
   margin-bottom: 30px;
   padding: 10px;
   cursor: pointer;
@@ -149,7 +142,8 @@
 .card-title-singleCard {
   /* make all leters upper */
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 10px;
+  padding: 5px;
   margin-top: 15px;
   font-weight: 500;
 }
@@ -171,4 +165,18 @@
 .ups {
   margin-top: 10px;
   margin-bottom: 30px;
+}
+
+.othersBuy-container {
+  display: flex;
+  justify-content: center;
+}
+
+.SingleCardMsgBasket {
+  position: absolute;
+  margin-top: -450px;
+  margin-left: 65%;
+  color: red;
+  font-weight: 500;
+  /* font-size: 10px; */
 }

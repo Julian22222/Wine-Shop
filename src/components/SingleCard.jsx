@@ -226,7 +226,7 @@ const SingleCard = () => {
                     }}
                     className="button-singleCard"
                   >
-                    Comments
+                    Show Comments
                   </button>
                 )}
 
@@ -438,34 +438,36 @@ const SingleCard = () => {
         Take a look at what others are buying
       </h2>
 
-      <ul>
-        {value.whatOthersBuy?.map((item) => {
-          return (
-            <Link to={`/wines/${item._id}`} className="Border">
-              <button onClick={handleSingleCard} className="single">
-                <li key={(item._id, item.winery)}>
-                  <div className="card">
-                    <img
-                      src={item.image}
-                      alt="different wines"
-                      width="100"
-                      height="200"
-                      className="card-img"
-                    />
-                    <div className="card-body">
-                      <h1 className="card-title-singleCard">{item.name}.</h1>
-                      <p className="card-sub-title-singleCard">
-                        {item.wine} wine.
-                      </p>
-                      <p className="card-info-singleCard">{item.rating}</p>
+      <div className="othersBuy-container">
+        <ul>
+          {value.whatOthersBuy?.map((item) => {
+            return (
+              <Link to={`/wines/${item._id}`} className="Border">
+                <button onClick={handleSingleCard} className="single">
+                  <li key={(item._id, item.winery)}>
+                    <div className="card">
+                      <img
+                        src={item.image}
+                        alt="different wines"
+                        width="100"
+                        height="200"
+                        className="card-img"
+                      />
+                      <div className="card-body">
+                        <h1 className="card-title-singleCard">{item.name}.</h1>
+                        <p className="card-sub-title-singleCard">
+                          {item.wine} wine.
+                        </p>
+                        <p className="card-info-singleCard">{item.rating}</p>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              </button>
-            </Link>
-          );
-        })}
-      </ul>
+                  </li>
+                </button>
+              </Link>
+            );
+          })}
+        </ul>
+      </div>
 
       {/* if orderBasket dosn't contain the same item you adding, it will show msg ->your order has been sent */}
       {showAddedToTheBasketMSG && !value.msgAlreadyInTheBasket ? (

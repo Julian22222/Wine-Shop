@@ -47,7 +47,7 @@ const Basket = () => {
                       src={item.image}
                       alt="different wines"
                       width="100"
-                      height="221"
+                      height="220"
                       className="card-img"
                     />
                   </div>
@@ -55,7 +55,7 @@ const Basket = () => {
               </Link>
 
               <RemoveItem item={item} />
-              <p>{item.price} per bottle</p>
+              <p className="itemPrice-perBottle">{item.price} per bottle</p>
               <p className="Quantity">Quantity:</p>
               <br />
               {/* <p className="QuantityNum">{Number(item.qty) + Number(count)}</p> */}
