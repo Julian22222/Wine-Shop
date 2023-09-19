@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/Wine-Shop/static/css/main.75596330.css",
-    "main.js": "/Wine-Shop/static/js/main.254b3dc2.js",
+    "main.css": "/Wine-Shop/static/css/main.5a34117f.css",
+    "main.js": "/Wine-Shop/static/js/main.d0caf87d.js",
+    "static/media/back.jpg": "/Wine-Shop/static/media/back.7a128694324c30723355.jpg",
+    "static/media/peakpx (21).jpg": "/Wine-Shop/static/media/peakpx (21).1e7b9253b73340869027.jpg",
     "static/media/instagram.png": "/Wine-Shop/static/media/instagram.e719d8b29f452a16302d.png",
     "static/media/ups.png": "/Wine-Shop/static/media/ups.bceb546812184ed4f73d.png",
     "static/media/paypal .png": "/Wine-Shop/static/media/paypal .22b740f777bdc0efc652.png",
@@ -14,11 +16,11 @@
     "static/media/masterCard.png": "/Wine-Shop/static/media/masterCard.8ab93d6d024df326004d.png",
     "static/media/apple-pay.png": "/Wine-Shop/static/media/apple-pay.c05c5dbb2291b539538d.png",
     "index.html": "/Wine-Shop/index.html",
-    "main.75596330.css.map": "/Wine-Shop/static/css/main.75596330.css.map",
-    "main.254b3dc2.js.map": "/Wine-Shop/static/js/main.254b3dc2.js.map"
+    "main.5a34117f.css.map": "/Wine-Shop/static/css/main.5a34117f.css.map",
+    "main.d0caf87d.js.map": "/Wine-Shop/static/js/main.d0caf87d.js.map"
   },
   "entrypoints": [
-    "static/css/main.75596330.css",
-    "static/js/main.254b3dc2.js"
+    "static/css/main.5a34117f.css",
+    "static/js/main.d0caf87d.js"
   ]
 }
