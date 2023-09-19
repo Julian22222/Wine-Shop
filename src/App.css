@@ -10,9 +10,12 @@
 
 body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   /* background-color: #282c34; */
-  background-color: #36768c;
+  /* background-color: #36768c; */
+  background-image: url("./IMG/peakpx\ \(21\).jpg");
+  /* backdrop-filter: grayscale(50%); */
+  /* backdrop-filter: blur(5px); */
   font-family: "roboto";
 }
 

@@ -39,6 +39,9 @@ function App() {
   // if the order basket already contains the same item -> show msg, you already have this item in the basket
   const [msgAlreadyInTheBasket, setMsgAlreadyInTheBasket] = useState(false);
 
+  //totalBill for all wines ,from basket page
+  const [totalBill, setTotalBill] = useState(0);
+
   const value = {
     wineList,
     setWineList,
@@ -54,6 +57,8 @@ function App() {
     setWhatOthersBuy,
     msgAlreadyInTheBasket,
     setMsgAlreadyInTheBasket,
+    totalBill,
+    setTotalBill,
   };
 
   return (

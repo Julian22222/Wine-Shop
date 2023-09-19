@@ -78,50 +78,51 @@ const Home = () => {
   ///////////////////////////////////////////////////////////////SortBy
 
   if (value.SortBy === "year" && value.order === "asc") {
-    value.wineList = value.wineList.sort((a, b) => {
+    value.wineList.sort((a, b) => {
       return Number(a.year) > Number(b.year) ? -1 : 1;
     });
   }
 
   if (value.SortBy === "year" && value.order === "desc") {
-    value.wineList = value.wineList.sort((a, b) => {
+    value.wineList.sort((a, b) => {
       return Number(a.year) > Number(b.year) ? 1 : -1;
     });
   }
 
-  if (value.sortBy === "reviews" && value.order === "asc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.reviews.length) > Number(b.reviews.length) ? -1 : 1;
+  if (value.SortBy === "reviews" && value.order === "asc") {
+    value.wineList.sort((a, b) => {
+      return a.reviews.length > b.reviews.length ? -1 : 1;
     });
   }
 
   if (value.SortBy === "reviews" && value.order === "desc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.reviews.length) > Number(b.reviews.length) ? 1 : -1;
+    value.wineList.sort((a, b) => {
+      return a.reviews.length > b.reviews.length ? 1 : -1;
     });
   }
 
-  if (value.sortBy === "rating" && value.order === "asc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.rating) > Number(b.rating) ? -1 : 1;
+  if (value.SortBy === "rating" && value.order === "asc") {
+    value.wineList.sort((a, b) => {
+      return a.rating > b.rating ? -1 : 1;
     });
   }
 
   if (value.SortBy === "rating" && value.order === "desc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.rating) > Number(b.rating) ? 1 : -1;
+    value.wineList.sort((a, b) => {
+      return a.rating > b.rating ? 1 : -1;
     });
   }
+  ///////////////////////////////////////////////////////////////////////////
 
-  if (value.sortBy === "votes" && value.order === "asc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.votes) > Number(b.votes) ? -1 : 1;
+  if (value.SortBy === "votes" && value.order === "asc") {
+    value.wineList.sort((a, b) => {
+      return a.votes > b.votes ? -1 : 1;
     });
   }
 
   if (value.SortBy === "votes" && value.order === "desc") {
-    value.wineList = value.wineList.sort((a, b) => {
-      return Number(a.votes) > Number(b.votes) ? 1 : -1;
+    value.wineList.sort((a, b) => {
+      return a.votes > b.votes ? 1 : -1;
     });
   }
 

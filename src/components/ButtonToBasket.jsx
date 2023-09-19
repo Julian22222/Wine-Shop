@@ -11,8 +11,13 @@ const ButtonToBasket = (props) => {
   const handleBtn = (event) => {
     event.preventDefault();
 
-    // creating variable ->qty in eachCard, where we store quantity of order
+    // creating variable ->qty in eachCard, where we store quantity of this wine customer would like to buy
     props.eachCard.qty = quantity;
+
+    // creating variable ->total in eachCard, where we keep total amount of money to pay for this type of wine
+    props.eachCard.total = (quantity * props.eachCard.price.slice(1)).toFixed(
+      2
+    );
 
     // console.log("BASKETLIST", value.basketList);
     // console.log("EACH CARD", props.eachCard);
@@ -45,6 +50,12 @@ const ButtonToBasket = (props) => {
         props.setShowAddedToTheBasketMSG(false);
       }, 2000);
     }
+
+    value.setTotalBill((prevData) => {
+      return (Number(prevData) + Number(props.eachCard.total)).toFixed(2);
+    });
+
+    console.log("Total price for this wine", props.eachCard.total);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
   };

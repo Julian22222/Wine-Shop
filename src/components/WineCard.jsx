@@ -11,7 +11,7 @@ const WineCard = (props) => {
       <img
         src={props.image}
         alt="different wines"
-        width="200"
+        width="195"
         height="300"
         className="card-img"
       />

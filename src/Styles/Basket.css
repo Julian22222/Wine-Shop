@@ -1,6 +1,7 @@
 .Basket {
   /* text-align: center; */
-  height: 100vh;
+  /* height: 100vh; */
+  height: fit-content;
   margin-left: 100px;
 }
 
@@ -22,6 +23,7 @@
   width: 40em;
   height: 100%;
   padding: 5px;
+  border-radius: 10px;
 }
 
 .Quantity {
@@ -78,4 +80,9 @@
   background-color: transparent;
   border: transparent;
   margin-top: -10px;
+}
+
+.totalBill {
+  margin-top: 20px;
+  font-size: 26px;
 }

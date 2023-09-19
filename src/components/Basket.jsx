@@ -5,30 +5,13 @@ import { useContext } from "react";
 import RemoveItem from "./RemoveItem";
 
 const Basket = () => {
-  const [count, setCount] = useState(0);
-  const [total, setTotal] = useState(0);
-
   const [updateQty, setUpdateQty] = useState(0);
 
   const value = useContext(Context);
 
-  // const [msgSendOrder, setMsgSendOrder] = useState(false);
+  useEffect(() => {}, [updateQty]);
 
-  useEffect(() => {}, [count, total, updateQty]);
-
-  const hadleOrder = () => {
-    value.setBasketList([]);
-  };
   //////////////////////////////////////////////////////////////////////////////
-  // const handleAddQty = (num, itemQty, itemPrice) => {
-  //   setCount(count + num);
-  //   setTotal(Number(total) + Number(itemPrice.slice(1)));
-  // };
-
-  const handleremoveQty = (num, itemQty, itemPrice) => {
-    setCount(count + num);
-    setTotal(total - Number(itemPrice.slice(1)));
-  };
 
   return (
     <div className="Basket">
@@ -63,43 +46,47 @@ const Basket = () => {
               <div className="QuantityBtn-container">
                 <button
                   className="QuantityBtn"
-                  // 2 functions within onCLick block
-                  onClick={(event) => {
+                  // 4 functions within onCLick block
+                  onClick={() => {
                     item.qty--;
                     setUpdateQty((prevState) => {
-                      prevState--;
+                      return prevState - 1;
+                    });
+                    // item.total = (item.qty * item.price.slice(1)).toFixed(2);
+
+                    //set total Bill
+                    value.setTotalBill((prevData) => {
+                      return (
+                        Number(prevData) - Number(item.price.slice(1))
+                      ).toFixed(2);
                     });
                     console.log(updateQty);
                   }}
+                  disabled={item.qty === 0}
                 >
                   -
                 </button>
 
-                {/* <button
-                  disabled={Number(item.qty) + Number(count) === 0}
-                  className="QuantityBtn"
-                  onClick={() => handleremoveQty(-1, item.qty, item.price)}
-                >
-                  -
-                </button> */}
-
                 {/* ///////////////////////////////////////////////////////////////////// */}
-
-                {/* <button
-                  className="QuantityBtn"
-                  onClick={() => handleAddQty(1, item.qty, item.price)}
-                >
-                  +
-                </button> */}
 
                 <button
                   className="QuantityBtn"
-                  // 2 functions within onCLick block
-                  onClick={(event) => {
+                  // 4 functions within onCLick block
+                  onClick={() => {
                     item.qty++;
                     setUpdateQty((prevState) => {
-                      prevState++;
+                      return prevState + 1;
                     });
+
+                    // item.total = (item.qty * item.price.slice(1)).toFixed(2);
+
+                    //set total Bill
+                    value.setTotalBill((prevData) => {
+                      return (
+                        Number(prevData) + Number(item.price.slice(1))
+                      ).toFixed(2);
+                    });
+
                     console.log(updateQty);
                   }}
                 >
@@ -108,11 +95,8 @@ const Basket = () => {
               </div>
               <div>
                 <p className="totalPrice-forThisTypeOfWine">
-                  Total:{" "}
-                  {(
-                    Number(item.qty) * Number(item.price.slice(1)) +
-                    Number(total)
-                  ).toFixed(2)}
+                  Total: £
+                  {(Number(item.qty) * Number(item.price.slice(1))).toFixed(2)}
                 </p>
               </div>
             </li>
@@ -120,15 +104,15 @@ const Basket = () => {
         })}
       </ul>
       {value.basketList.length > 0 ? (
-        <Link to="/checkout">
-          <button className="OrderBtn" onClick={hadleOrder}>
-            Checkout
-          </button>
-        </Link>
+        <div>
+          <p className="totalBill">Total:£{value.totalBill}</p>
+          <Link to="/checkout">
+            <button className="OrderBtn">Checkout</button>
+          </Link>
+        </div>
       ) : null}
 
-      {/* <p> button Order appears when basketList.length more than 0 </p>
-      <p>when you click on Order button - basketList - become empty, show message your order has been sent</p> */}
+      {/* <p> button Order appears when basketList.length more than 0 </p> */}
     </div>
   );
 };

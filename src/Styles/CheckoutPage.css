@@ -8,7 +8,7 @@
   padding: 10px;
   border: 2px solid;
   margin-left: 10px;
-  width: 40%;
+  width: 600px;
 }
 
 .totalOrder-container {
@@ -19,12 +19,14 @@
 
 .border-container-main {
   margin-top: 30px;
+  /* width: 50%; */
 }
 
 .border-container {
   padding: 10px;
   border: 2px solid;
   margin: 10px;
+  /* width: 50%; */
 }
 
 .border-container-head-text {
@@ -35,4 +37,36 @@
   margin-left: 20px;
   background-color: #36768c;
   padding: 0 10px;
+}
+
+.payment-container-checkout {
+  position: absolute;
+  background-color: antiquewhite;
+  color: green;
+  /* display: flex; */
+  justify-content: center;
+  /* text-align: center; */
+  padding: 50px;
+  margin-top: -300px;
+  margin-left: 30%;
+}
+
+.tick-checkout {
+  font-size: 35px;
+  margin-left: 40%;
+}
+
+.main-flex-checkout {
+  width: fit-content;
+}
+
+.left-side-flexbox {
+  display: flex;
+  flex-basis: 50%;
+}
+
+.right-side-flexbox {
+  margin-left: 30px;
+  display: flex;
+  flex-basis: 50%;
 }

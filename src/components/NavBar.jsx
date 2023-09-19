@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Context from "./Context";
 import { useContext } from "react";
 
@@ -9,6 +9,8 @@ const NavBar = () => {
 
   const handleHome = () => {
     value.setWineType("");
+    value.setSortBy("");
+    value.setOrder("");
   };
 
   return (
@@ -17,26 +19,26 @@ const NavBar = () => {
         {items.map((item) => {
           return item === "home" ? (
             <li key={item} className="NavBar">
-              <Link
+              <NavLink
                 to="/Wine-Shop"
                 className="NavBar-link"
                 onClick={handleHome}
               >
                 {" "}
                 {item}
-              </Link>
+              </NavLink>
             </li>
           ) : item === "requests" ? (
             <li key={item} className="NavBar">
-              <Link to="requests" className="NavBar-link">
+              <NavLink to="requests" className="NavBar-link">
                 {item}
-              </Link>
+              </NavLink>
             </li>
           ) : (
             <li key={item} className="NavBar">
-              <Link to="basket" className="NavBar-link">
+              <NavLink to="basket" className="NavBar-link">
                 {item}
-              </Link>
+              </NavLink>
             </li>
           );
         })}

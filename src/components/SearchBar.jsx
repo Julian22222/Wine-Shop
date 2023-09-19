@@ -24,9 +24,9 @@ const SearchBar = () => {
 
   return (
     <div className="SearchBar">
-      <label>Wine Type: </label>
+      <label style={{ fontSize: 20, fontWeight: "bolder" }}>Wine Type: </label>
       <select onChange={handleType} name="SortBy" className="SortBy">
-        <option></option>
+        <option value=""></option>
         <option value="Red">Red</option>
         <option value="White">White</option>
         <option value="Sparkling">Sparkling</option>
@@ -34,7 +34,13 @@ const SearchBar = () => {
         <option value="Dessert">Dessert</option>
       </select>
 
-      <span className="sort-block"> Sort By: </span>
+      <span
+        className="sort-block"
+        style={{ fontSize: 20, fontWeight: "bolder" }}
+      >
+        {" "}
+        Sort By:{" "}
+      </span>
       <select onChange={handleSortBy}>
         <option></option>
         <option value="reviews">Reviews</option>
@@ -43,7 +49,13 @@ const SearchBar = () => {
         <option value="votes">Votes</option>
       </select>
 
-      <span className="order-block"> Order: </span>
+      <span
+        className="order-block"
+        style={{ fontSize: 20, fontWeight: "bolder" }}
+      >
+        {" "}
+        Order:{" "}
+      </span>
       <select onChange={handleOrder}>
         <option></option>
         <option value="asc">Ascending</option>

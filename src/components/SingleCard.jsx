@@ -20,7 +20,7 @@ const SingleCard = () => {
   const [eachCard, setEachCard] = useState([]);
   // const [whatOthersBuy, setWhatOthersBuy] = useState([]);
 
-  // delivery btn
+  // delivery info btn
   const [showDelivery, setShowDelivery] = useState(false);
 
   const [voteIncrementCounter, setVoteIncrementCounter] = useState(0);
@@ -118,9 +118,6 @@ const SingleCard = () => {
         "Content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify({
-        // name: reviewPost.name,
-        // text: reviewPost.text,
-        // date_time: reviewPost.date_time,
         reviews: eachCard.reviews,
       }),
     })
@@ -144,7 +141,6 @@ const SingleCard = () => {
 
     const updatedVotes = eachCard?.votes - 1;
 
-    // console.log(voteDecrementCounter);
     fetch(`https://wine-shop-backend.onrender.com/wines/${_id}`, {
       method: "PATCH",
       body: JSON.stringify({
@@ -232,13 +228,13 @@ const SingleCard = () => {
 
                 {showComments && eachCard.reviews.length === 0 ? (
                   <div>
-                    <p>No Comments here. </p>
+                    <p className="noCom">No Comments here. </p>
                   </div>
                 ) : null}
 
                 {showComments && yourComment ? (
                   <div>
-                    <label>Name:</label>
+                    <label className="nameReq-singleCard">Name:</label>
                     <form onSubmit={handlePost}>
                       <input
                         className="input-singleCard"
@@ -275,15 +271,6 @@ const SingleCard = () => {
                       </button>
                     </form>
                     <div>
-                      {/* <button
-                        onClick={() => {
-                          setYourComment(false);
-                        }}
-                        className="close-comment-btn"
-                      >
-                        Close
-                      </button> */}
-
                       {/* ////////////////////////////////////////////////////////////////////////// */}
                       {showComments && commentShowMsg ? (
                         <p style={{ color: "#ccc" }}>
@@ -370,7 +357,6 @@ const SingleCard = () => {
                 <br />
                 <strong>Rating: </strong> <span> {eachCard?.rating}</span>
                 <br />
-                {/* <strong>Reviews: </strong> <span> {eachCard?.reviews}</span> */}
                 <br />
                 <strong>Description:</strong>{" "}
                 <span>{eachCard?.description}</span>
