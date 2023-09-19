@@ -62,7 +62,7 @@
 
 .left-side-flexbox {
   display: flex;
-  flex-basis: 50%;
+  flex-basis: 40%;
 }
 
 .right-side-flexbox {
