@@ -175,7 +175,7 @@ const SingleCard = () => {
 
       <div className="SingleCard">
         {eachCard?.name ? (
-          <div>
+          <div key={(eachCard.name, eachCard.location)}>
             <div className="main-single-card-container">
               <div className="left-flexbox-container">
                 <img
@@ -468,6 +468,8 @@ const SingleCard = () => {
           You already have this item in the basket.
         </p>
       ) : null}
+
+      {err ? <p>{err}</p> : null}
     </div>
   );
 };

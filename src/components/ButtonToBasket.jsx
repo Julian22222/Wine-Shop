@@ -55,7 +55,7 @@ const ButtonToBasket = (props) => {
       return (Number(prevData) + Number(props.eachCard.total)).toFixed(2);
     });
 
-    console.log("Total price for this wine", props.eachCard.total);
+    // console.log("Total price for this wine", props.eachCard.total);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
   };

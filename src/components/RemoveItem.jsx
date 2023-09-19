@@ -4,7 +4,7 @@ import { useContext } from "react";
 const RemoveItem = (props) => {
   const { item } = props;
   const value = useContext(Context);
-  console.log(item);
+  // console.log(item);
   //   const handleRemove = (itemOfBasket) => {
   //     value.setBasketList((current) => {
   //   const newBasket = [...current];

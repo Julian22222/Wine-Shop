@@ -6,20 +6,20 @@ const SearchBar = () => {
 
   const handleType = (event) => {
     value.setWineType(event.target.value);
-    console.log(event.target.value);
-    console.log(value.wineType);
+    // console.log(event.target.value);
+    // console.log(value.wineType);
   };
 
   const handleSortBy = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     value.setSortBy(event.target.value);
-    console.log(value.SortBy);
+    // console.log(value.SortBy);
   };
 
   const handleOrder = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     value.setOrder(event.target.value);
-    console.log(value.order);
+    // console.log(value.order);
   };
 
   return (

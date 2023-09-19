@@ -60,7 +60,6 @@ const Basket = () => {
                         Number(prevData) - Number(item.price.slice(1))
                       ).toFixed(2);
                     });
-                    console.log(updateQty);
                   }}
                   disabled={item.qty === 0}
                 >
