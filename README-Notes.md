@@ -59,11 +59,11 @@ npx create-react-app my-app-name
 
 # Different types of writing React components
 
-## React components can be either function or class.
+## React components can be either functional or class based.
 
 [Components](https://react.dev/reference/react/Component)
 
-1. Function example
+1. Function Component
 
 ```JS
 import Header from "./components/Header";  //<--importing other component in here, to use it in this component
@@ -97,7 +97,17 @@ export default App;  // <-- export this component, always write this in the bott
 //then we can import App from "./App.jsx" in other component, write this on the top of the file component
 ```
 
-2. Class example
+2. Class component
+
+- To create a class based component we will create a Javascript class that inherits from Component using the extends keyword.
+- Constructor --> When writing the constructor for an inherited class the first thing we must do is to call the parent class constructor using the super keyword. This will call the React.Component constructor allowing us to inherit all of the functionality of that class. Our constructor will be invoked with the props of our component and one of the things super(props) will do is attach the props to the instance of our class on this.props.
+- Our constructor will be invoked by React and we will not need to instantiate the class ourselves so no need for the new keyword as this will be handled by React.
+- Render --> In functional components we would return some JSX to be rendered. As we are now in a class we must define a method called render to achieve the same purpose. This method is named by React and here we will return the JSX for our components UI. Note that to access the props we need to use the this keyword in order to access the instance properties
+- State --> Class based components can be used to hold values in state. We can hold state values on a property of state and update those values with an inherited method called setState
+
+- this.state --> In our constructor we can set the initial value of our components state. As we can only have a single value in state this value is an object which can hold multiple properties.
+
+- this.setState --> When extending from the React.Component class we inherit the setState method. This can be used to update the components state following the same rules as the functions returned by useState. We can pass a new state object or pass a function that is invoked with the current state.
 
 ```JS
 import { Component } from 'react';
@@ -105,7 +115,7 @@ import { Component } from 'react';
 // class App extends React.Component { <--the same, if we don't import import { Component } from 'react';
 class App extends Component {
 
- state = {
+ this.state = {            //<-- state values , update these values with method called setState,  can have a single value in state which can hold multiple properties
     age: 42,
   };
 
@@ -126,6 +136,170 @@ class App extends Component {
             <p>You are {this.state.age}.</p>
         </div>
             );
+  }
+}
+```
+
+Example 2
+
+```JS
+import React from 'react';
+
+class Greeting extends React.Component {
+  constructor(props) {
+    super(props); // this.props = props
+  }
+
+  render() {
+    return (
+      <section>
+        <p>Hello, nice to meet you {this.props.name}</p>
+      </section>
+    );
+  }
+}
+
+// App.js
+const App = () => {
+  return (
+    <div>
+      <Greeting name='Paul' />  //<--passing name="Paul to Greeting component"
+    </div>
+  );
+}
+```
+
+###### The same component in Functional and Class example
+
+```JS
+//Functional component
+
+const CounterWithHooks = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount((currCount) => currCount + 1)}>Add one</button>
+    </div>
+  );
+};
+```
+
+- Class components are used more often
+- When we use Class component we don't use hooks. When we write --> extends React.Component we are inherit method setState (useState in Functional components). Using setState for updating the state of the component the same way as useState in Functional components.
+
+```JS
+//Class component
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);                     //<-- this allowing us to inherit all of the functionality of that class
+
+    // set initial state, here we can use different states
+    this.state = {
+      count: 0,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Count: {this.state.count}</h1>
+
+        // update the state using this.setState
+        <button
+          onClick={() =>
+            this.setState((currState) => {
+              return { count: currState.count + 1 };
+            })
+          }
+        >
+          Add one
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+Example 4
+Class component
+
+```JS
+import React from 'react';
+
+classApp extends React.Component{
+//Inside 1 component we have all methods and variables that we needed
+
+helpText = "Help text";    //<-- to interact with this variable use--> this.helpText
+
+render(){
+    return(
+        <div className="Name">
+            <Header title="This is my header" />             //<-- passing title properties to Header component
+            <h1>{this.helpText}</h1>
+            <input placeholder={this.inputClick} onMouseEnter={this.mouseOver} />
+
+            //If we want to interact with variables inside this class always use --> this.  before variable that you want to use (this.helpText)
+
+            <p> {this.helpText === "Help text!" ? "Yes" : "No" } </p>
+        </div>
+    );
+
+inputClick(){console.log("Clicked")}    //<-- to interact with this method --> this.inputClick
+mouseOver(){console.log("Mouse over")}   //<-- to interact with this method --> this.mouseOver
+
+
+class Header extends React.Component{
+    render(){
+        return(
+            <header> {this.props.title}</header>   //<-- use this.props.title , that was passed in App class
+        );
+    }
+}
+}
+}
+
+export default App;
+```
+
+Example 5
+
+- when using a Class component , we can create our own methods(functions) inside a Class
+
+```JS
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+      count: 0,
+    };
+
+
+    // bind incrementCounts value of this to the correct instance of Counter
+    this.incrementCount = this.incrementCount.bind(this);
+  }
+
+  // define a custom method
+  incrementCount() {
+    this.setState((currState) => {
+      return {
+        count: currState.count + 1,
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Count: {this.state.count}</h1>
+        // pass the method as a handler
+        <button onClick={this.incrementCount}>Add one</button>
+      </div>
+    );
   }
 }
 ```
@@ -436,20 +610,77 @@ A component is controlled if:
 const ItemAdder =()=>{
 
 const [newItem, setNewItem] = useState("");
+
 return(
     <form>
         <label>
-            Adda new item:
+            Add a new item:
 
             //Each controlled component must have --> value={...} and onChange={....}, if any of this block will be missing then we can't change the useState or it will have constant values
             //value={newItem} <--input data will be available in newItem, everything that will be typed in the input will be available in newItem
             //onChange={(event)=>setNewItem(event.target.value)}  <--onChange event is trigered every time when input value is changed
-            <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />
+
+            <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />  //<--everything user write in this input will be inserting to newItem useState
         </label>
         <button type="submit" > Add item </button>
     </form>
 );
 };
+```
+
+#### Multiple elements in Controlled Component
+
+- Example 1
+
+```JS
+const [formData, setFormData] useState({
+name: "",
+lastname: "",
+email: "",
+phone: ""
+});
+
+const onChange=(e)=>{
+    setFormData((prev)=>{                  //<--will write new data using setFormData
+        let prevData = {...prev};          //<-- creating a copy of previous value from formData using spread operator and adding this value to prevData variable
+        prevData[`${e.target.id}`] = e.target.value;     //<--asign new value , key = value
+
+        return prevData;
+    });
+};
+
+
+<input type="text" value={formData.name}     //<-- all inserted text will go to formData.name in useState
+onChange={onChange}                          //<--we invoke onChange function on any text change in the input
+id="name"                                    //<-- id must be the same as in formData useState object
+placeholder="name" />
+
+<input type="text" value={formData.lastname} onChange={onChange} id="lastname" placeholder="lastname" />
+<input type="email" value={formData.email} onChange={onChange} id="email" placeholder="email" />
+<input type="phone" value={formData.phone} onChange={onChange} id="phone" placeholder="phone" />
+
+```
+
+- Example 2
+
+```JS
+const [data,setData] = useState({
+userEmail: "",
+title: "",
+progress: ""
+});
+
+const handleChange =(e)=>{
+
+const {name, value} = e.target;    //<--destructuring name and value from e.target
+setData(data=>(
+    ...data, [name] : value      //<--creating a copy of previous value from data using spread operator and adding new key value pair to the data useState
+));
+};
+
+<input type="email" required name="userEmail" value={data.userEmail} onChange={handleChange} />
+<input type="text" required maxLength={30} name="title" value={data.title} onChange={handleChange} />
+<input type="range" min="0" max="100" required name="progress" value={data.progress} onChange={handleChange} />
 ```
 
 # Forms
@@ -776,7 +1007,7 @@ return(
 
 Server-side routing
 
-- The server has vies for every single route of our app.
+- The server has view for every single route of our app.
 - user navigates to /about , the browser sends a GET request to /about and our server responds wih corresponding view.
 
 Client-side routing
@@ -818,6 +1049,16 @@ return(
     </BrowserRouter>
 );
 };
+```
+
+# React Default Routes (if user uses any URl that not existing in our app -> it will show some page that we will create)
+
+react-router provide a path atribute --> "\*" , it means that it will show certain page if user uses any page that is not assigned or not existing
+
+```JS
+<Route path="*" element={ErrorPage} />
+
+//ErrorPage <-- we create separate component for error page, if the route is missing in our code then it will show ErrorPage component and it will be displayed to the user
 ```
 
 # Links
@@ -962,7 +1203,7 @@ const handleIncrement=()=>{
 
     fetch(`http://...../${article_id}/comments`,{   //<--this part posting changes to the database, uploading + 1 like to the server
     method: 'PATCH',
-    headers: {"Content-type":"application/json"},
+    headers: {"Content-type":"application/json; charset=HTF-8"},
     body: JSON.stringify({//HERE WHAT WE ARE POSTING TO THE SERVER, votes: +1})
     })
     .then((res)=>res.josn())
@@ -975,7 +1216,7 @@ const handleIncrement=()=>{
 
 <button onClick={handleIncrement} > Like  </button>   //<-- by pressing this Like btn , it will invoke --> handleIncrement function
 
-{err ? <p>{err}</p> : null} //will show the error if there is an error by edetting the data on the server, if no error will bot show anything
+{err ? <p>{err}</p> : null} //if there is an error then it will show the error, if no error will not show anything
 ```
 
 #### Optimistic approach
@@ -1070,6 +1311,252 @@ function MyComponent(){
 
 ...........................................................................................................................
 
+# Client Side vs Server Side Errors
+
+- Sometimes errors that can occur could be dealt with before a request is sent to a backend - client side. Sometimes the only time you can know something is wrong is when the server responds with an error - server side.
+
+- Client Side (Post information like body is missing, The user use URL that is not existing etc. )
+
+- Server Side (the server isn't working, URL is wrong, incorrect Id that user requesting, the user not authorised to access a resource etc.)
+
+# Sorting and Pagination
+
+- When render a list of array items or we need to sort some array in React we must not mutate original array (Don't mutate state)
+- To avoid array mutation we need to create a copyb of this array before we start sort, map etc. Therefore we use spread operator --> [...items] <--as example, it will copy all the elements from current array to new the array (create a shallow copy of the array) , whech we can change and use further.
+
+Example of mutation
+
+```JS
+cosnt List=()=>{
+
+const [items, setItems] = useState(['banana', 'apple']);
+
+return(
+<div>
+   <ul>
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <button
+        onClick={() => {
+          setItems((items) => items.sort()); // This is bad
+        }}
+      >
+        Sort alphabetically
+      </button>
+
+{/* use example below*/}
+    <button
+        onClick={() => {
+        setItems((items) => [...items].sort());  // <-- here we use spread operator and don't mutate the state, we create a shallow copy of the array
+        }}
+        >Sort alphabetically
+    </button>
+</div>
+);
+};
+```
+
+Also we can use 2 buttons, have we want to sort this items list (in alphabetic order or the other way around)
+In this example items and the sort value are stored in useState and are updated independently. --> This is not ideal
+clicking the "Sort buttons" doesn't trigger an update to the items array, (array list not changing for a user -UI is not changed)
+
+```JS
+const List = () => {
+  const [items, setItems] = useState(['banana', 'apple','pear', "pineapple"]);
+  const [sort, setSort] = useState('a -> z');
+
+  return (
+    <div>
+      {/* render items */}
+      <p>Sorted {sort}</p>
+      <button
+        onClick={() => {
+          setSort('a -> z');
+          setItems((items) => [...items].sort());  //<-- will sort items order in alphabetical order
+        }}
+      >
+        Sort a to z
+      </button>
+      <button
+        onClick={() => {
+          setSort('z -> a');
+          setItems((items) => {
+            return [...items].sort((a, b) => {
+              return b.localeCompare(a);               //<-- will sort items order in "Z" --> "A" order
+            });
+          });
+        }}
+      >
+        Sort z to a
+      </button>
+    </div>
+  );
+};
+```
+
+This example uses useEffect and when a user clicks a button it will trigger an update to the items array
+
+```JS
+
+const List = () => {
+  const [items, setItems] = useState(['banana', 'apple', "lemon"]);
+  const [sort, setSort] = useState('a -> z');
+
+  useEffect(() => {
+    if (sort === 'a -> z') {
+      setItems((items) => [...items].sort());
+    } else {
+      setItems((items) => {
+        return [...items].sort((a, b) => {
+          return b.localeCompare(a);
+        });
+      });
+    }
+  }, [sort]);
+
+  return (
+    <div>
+      {/* render items */}
+      <button onClick={() => setSort('a -> z')}>Sort a to z</button>
+      <button onClick={() => setSort('z -> a')}>Sort z to a</button>
+    </div>
+  );
+};
+```
+
+this example with --> API requests, calls
+
+```JS
+const List = () => {
+
+  const [items, setItems] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+
+useEffect(() => {
+    setIsLoading(true);   //<--until we don't get the response back from the server --> loading state = true, and i t will show Loading... message
+
+    api
+    .getItems({ sort })
+    .then((items) => {
+      setItems(items);
+      setIsLoading(false);     //<-- here we recive the response and setIsLoading = false, removes loading message from UI
+    })
+    .catch((err) => {
+      // error handle
+    });
+}, [items]);    //when items in useState is changing it will update the UI items list
+
+
+
+  return (
+    <div>
+    <ul>
+        {items.map(item)=>{
+            <li key={item}>
+                {item}
+            </li>
+        }}
+    </ul>
+
+      <button onClick={() => setItems([...items,apple])}>Add Apple</button>    //<--when we change items array it will trigger useEffect
+    </div>
+  );
+};
+```
+
+# Pagination
+
+- API's usually has lots of data, could be more than 1000 elements (books for example)
+- Imagine how big the response would be if you could make a request to get all books from this server
+- There are many different ways that RESTful APIs can do this. A few of the common options are:
+
+  - Page numbers ( The client requests a particular "page" of results:)
+
+  ```JS
+  /items?p=1    <--responds with the first 10 items
+
+  /items?p=2    <--responds with items 11 -> 20
+  ```
+
+  - Limit / Offset (The client provides how many items they want to receive and where the server should start)
+
+  ```JS
+  /items?limit=10    <---responds with the first 10 items
+
+  /items?limit=10&start=11       <--responds with items 11 -> 20
+
+  ```
+
+  - Cursor (By providing an order, and an id for the last item that was received, the API figures out the next set of items the client should receive)
+
+  ```JS
+    /items?last_viewed_id=123
+  ```
+
+UI strategies how to show lost of data (1000 elements) on the page from the server resposne:
+
+- A "load more" button
+- "Next" & "Back" buttons
+- Page number buttons
+- Infinite scroll (new "pages" of the data are loaded when the user scrolls close to the buttom of hte list)
+
+##### "Next" & "Back" buttons
+
+- We need to track what is the current page state in --> useState. User must update the current page by clicking buttons, and we need to make sure that user can't request not existing pages by switching off particular buttons
+
+```JS
+
+<button
+  onClick={() => {
+    setPage((currentPage) => currentPage - 1);
+  }}
+  disabled={page === 0}                             //<-- if page === 0 , this button (Previous Page btn) will be disabled
+>
+  Previous Page
+</button>
+<button
+  onClick={() => {
+    setPage((currentPage) => currentPage + 1);
+  }}
+  disabled={PAGE_LENGTH * page >= totalCount}         //<-- The total number of pages can be calculated using the total count of items and the number of items per page. Because the total count could change, it would be good to keep this information in state and update it each time that more data is requested.
+>
+  Next Page
+</button>
+```
+
+Whenever the current page is updated in state, it can trigger a new request for a specific page of data:
+
+```JS
+useEffect(() => {
+  api.getItems({ page }).then(({ items, total_count }) => {
+    setItems(items);
+    setTotalCount(total_count);
+  });
+}, [page]);
+```
+
+##### Infinite Scroll
+
+- There are many ways to implement an infinite scroll. Sometimes necessary to set up a scroll event listener on the window, or some other scrollable element. If this is the case, it will be important to ensure the event listener is removed from the page when the component is unmounted. To do so, ensure a "cleanup" function is returned from the useEffect that removes the event listener:
+
+```JS
+useEffect(() => {
+  function handleScroll() {
+    // check whether user is close to bottom of page
+    // if so, fetch new "page" of data and add to state
+  }
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+```
+
 # Styling in React
 
 - When designing the style for our App we need to think about different screen sizes (phones,iPads, computers, laptops)
@@ -1082,6 +1569,133 @@ function MyComponent(){
         background-color: lightblue;
     }
 }
+```
+
+# Lifecycle methods
+
+- In order to perform side effects such as api calls in class based components we have a number of lifecycle methods we can use
+  - componentDidMount - Invoked immediately after the component is first rendered.
+  - componentDidUpdate - Invoked whenever props change, setState or forceUpdate are called
+  - componentWillUnmount - Invoked immediately before a component is removed from the page
+
+```JS
+//componentDidMount in Functional component
+
+useEffect(() => {
+  fetch('https://space-facts.herokuapp.com/api/planets')
+    .then((res) => res.json())
+    .then((data) => setPlanet(data.planets));
+}, [])
+```
+
+```JS
+//componentDidMount in Class component
+
+import React from 'react';
+
+class Planets extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      planets: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://space-facts.herokuapp.com/api/planets')
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ planets: data.planets });
+      });
+  }
+
+  render() {
+    return (
+      <section>
+        <h2>Planets</h2>
+        <ul>
+          {this.state.planets.map((planet) => {
+            // render each planet...
+          })}
+        </ul>
+      </section>
+    );
+  }
+}
+```
+
+```JS
+//componentDidUpdate in Functional component
+//often have dependencies when the effect should be re-rander --> [planetId]
+//by adding a variable to the dependency array React will compare the current value against the value on the previous render to see if they differ.
+
+const SinglePlanetWithHooks = ({ planetId }) => {
+  const [planet, setPlanet] = useState({});
+
+  useEffect(() => {
+    fetch(`https://space-facts.herokuapp.com/api/planets/${planetId}`)
+      .then((res) => res.json())
+      .then((data) => setPlanet(data.planet));
+  // if planetId changes between renders, re-run the effect
+  }, [planetId]);
+
+  return (
+    <section>
+      <h2>{planet.name}</h2>
+      {/* render the rest of the planet info */}
+    </section>
+  );
+};
+```
+
+```JS
+//componentDidUpdate in Class component
+// to achieve similar effect in a class based component we can use the componentDidUpdate lifecycle method.This method is invoked with some arguments in order for us the make the comparison between renders.--> 0: the previous render's props, 1: the previous render's state
+
+//We can then compare the two to see if the planetId has changed re-fetch the data if it has.
+
+//Just as with useEffect dependencies be careful how this comparison is made to avoid infinite loops. Notable prevProps and prevState are objects and prevProps !== this.props will always be true as they are both objects and have different references.
+
+
+class SinglePlanet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      planet: {},
+    };
+    this.fetchPlanet = this.fetchPlanet.bind(this);
+  }
+
+  componentDidMount() {
+    fetchPlanet();
+  }
+
+  componentDidUpdate(prevProps, prevState) {              //<-- 0: the previous render's props, 1: the previous render's state
+    if (prevProps.planetId !== this.props.planetId) {
+      fetchPlanet();
+    }
+  }
+
+  fetchPlanet() {
+    fetch(
+      `https://space-facts.herokuapp.com/api/planets/${this.props.planetId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ planet: data.planet });
+      });
+  }
+
+  render() {
+    return (
+      <section>
+        <h2>{planet.name}</h2>
+        {/* render the rest of the planet info */}
+      </section>
+    );
+  }
+}
+
 ```
 
 # Semantic tags
@@ -1129,3 +1743,12 @@ It can be npm packages or browser extensions
 ```JS
 <button area-label="Like"> Heart </button>  //<-- extra label , which here says 'like' ,s the user knows what the button does
 ```
+
+# Custom Hooks
+
+- In React we have been using some in built hooks to add functionality to our components. React also supports writing our own custom hooks to extract component logic into re-useable functions.
+
+- Custom hook is a function, whose name starts with "use" and can call other hooks within itself.
+- When we are calling hooks from within our components we must follow the rules of hooks and we must do the same with our custom hooks.
+
+- Custom hooks work exactly like components, the major difference being that they are not responsible for rendering data. Where our components will usually return some JSX (or potentially null) our custom hooks can return data in any form we would like.

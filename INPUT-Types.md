@@ -1,0 +1,25 @@
+# React Input
+
+<input type="hidden" />
+
+type="radio"
+type="text"
+type="number"
+type="time"
+type="submit"
+type="password"
+type="tel"
+type="url"
+type="week"
+type="range"
+type="button"
+type="search"
+type="reset"
+type="email"
+type="month"
+type="checkbox"
+type="date"
+type="datetime-local"
+type="file"
+type="image"
+type="color"
