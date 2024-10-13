@@ -83,7 +83,7 @@ const App =()=>{
                 {listItems.map((item)=>( //<--inserting JavaScrit to HTML using curly brackets
                     //<--always use key={...} with <li> tags, keys must be unique and key must be assign to each ellement in the array, keys help React identify which items have changed, are added or are removed. Most often you would use your data as keys. Index can't be used in the keys due it is changing when you adding or removing items in the array.
 
-                        to help React app identify each item in the list when we loop --> listItems.map((item)=>{...})
+                    //to help React app identify each item in the list when we loop --> listItems.map((item)=>{...})
                     <li key={item}>
                         {item}
                     </li>
@@ -100,7 +100,7 @@ export default App;  // <-- export this component, always write this in the bott
 2. Class component
 
 - To create a class based component we will create a Javascript class that inherits from Component using the extends keyword.
-- Constructor --> When writing the constructor for an inherited class the first thing we must do is to call the parent class constructor using the super keyword. This will call the React.Component constructor allowing us to inherit all of the functionality of that class. Our constructor will be invoked with the props of our component and one of the things super(props) will do is attach the props to the instance of our class on this.props.
+- Constructor --> When writing the constructor for an inherited class the first thing we must to do is to call the parent class constructor using the super keyword. This will call the React.Component constructor allowing us to inherit all of the functionality of that class. Our constructor will be invoked with the props of our component and one of the things super(props) will do is attach the props to the instance of our class on this.props.
 - Our constructor will be invoked by React and we will not need to instantiate the class ourselves so no need for the new keyword as this will be handled by React.
 - Render --> In functional components we would return some JSX to be rendered. As we are now in a class we must define a method called render to achieve the same purpose. This method is named by React and here we will return the JSX for our components UI. Note that to access the props we need to use the this keyword in order to access the instance properties
 - State --> Class based components can be used to hold values in state. We can hold state values on a property of state and update those values with an inherited method called setState
@@ -358,7 +358,7 @@ const App =()=>{
     // name <-- the current state value, Name = 'Paul'
     // setName <-- a function to update the state value, we can change the Name ="Paul" only using this function
     const [name, setName] = useState('Paul');
-    console.log(Name); //<--Paul
+    console.log(name); //<--Paul
 
     return(
         <div>
@@ -532,7 +532,7 @@ const [todos,setTodos] =useState([
 let reactCount = 0;
 
 todos.forEach((todo)=>{  //<--count how many react words we have in our todos
-if(todo === "react"){
+if(todo.text === "react"){
     reactCount++;
 }
 });
