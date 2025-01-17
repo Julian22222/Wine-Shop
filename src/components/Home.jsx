@@ -9,6 +9,7 @@ import SearchBar from "./SearchBar";
 
 const Home = () => {
   const value = useContext(Context);
+
   // const [cardId, setCardId] = useState([]);
 
   // const { id } = useParams();
