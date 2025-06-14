@@ -65,6 +65,7 @@ function App() {
     <BrowserRouter>
       <Context.Provider value={value}>
         <div className="App-header">
+          <div className="background" />
           <Homepage />
           <NavBar />
           <Routes>

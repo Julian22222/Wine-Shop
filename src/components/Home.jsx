@@ -6,6 +6,7 @@ import { useContext } from "react";
 // import { useParams } from "react-router-dom";
 // import ButtonForEachCard from "./ButtonForEachCard";
 import SearchBar from "./SearchBar";
+import loadingGif from "../IMG/loading.gif";
 
 const Home = () => {
   const value = useContext(Context);
@@ -132,7 +133,7 @@ const Home = () => {
       <SearchBar />
 
       {value.wineList.length > 0 ? (
-        <div>
+        <div className="wine-container">
           <ul>
             {value.wineList?.map((item) => {
               return (
@@ -156,7 +157,19 @@ const Home = () => {
           </ul>
         </div>
       ) : (
-        <h1 className="loading-home">Loading...</h1>
+        <div style={{ marginTop: "-300px" }}>
+          <img
+            src={loadingGif}
+            alt="loading-gif"
+            style={{
+              display: "block",
+              margin: "0 auto",
+            }}
+          />
+          <p className="loading-home" style={{ marginTop: "-100px" }}>
+            Loading...
+          </p>
+        </div>
       )}
     </div>
   );

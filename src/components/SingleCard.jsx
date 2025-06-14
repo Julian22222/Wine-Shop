@@ -11,6 +11,9 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { faCommentSlash } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const SingleCard = () => {
   const value = useContext(Context);
@@ -177,33 +180,37 @@ const SingleCard = () => {
         {eachCard?.name ? (
           <div key={(eachCard.name, eachCard.location)}>
             <div className="main-single-card-container">
+              {/* //////////////////////////////////////left flexbox container */}
               <div className="left-flexbox-container">
-                <img
-                  src={eachCard?.image}
-                  alt="different wines"
-                  width="600"
-                  height="700"
-                  className="pcs-singleCard"
-                />
-                <div className="like-dislike-container">
-                  <button
-                    onClick={handleLike}
-                    //  disabled={voteIncrementCounter !== 0 && voteDecrementCounter ===0}
-                    disabled={voteIncrementCounter !== 0}
-                  >
-                    {/* Like */}
-                    <FontAwesomeIcon icon={faThumbsUp} className="thumbsUp" />
-                  </button>
-                  <button
-                    onClick={handleDecrementVote}
-                    disabled={voteDecrementCounter !== 0}
-                  >
-                    {/* Dislike */}
-                    <FontAwesomeIcon
-                      icon={faThumbsDown}
-                      className="thumbsDown"
-                    />
-                  </button>
+                <div className="img-likes-comments-container">
+                  <img
+                    src={eachCard?.image}
+                    alt="different wines"
+                    width="300"
+                    height="350"
+                    className="pcs-singleCard"
+                    style={{ marginLeft: "5%" }}
+                  />
+                  <div className="like-dislike-container">
+                    <button
+                      onClick={handleLike}
+                      //  disabled={voteIncrementCounter !== 0 && voteDecrementCounter ===0}
+                      disabled={voteIncrementCounter !== 0}
+                    >
+                      {/* Like */}
+                      <FontAwesomeIcon icon={faThumbsUp} className="thumbsUp" />
+                    </button>
+                    <button
+                      onClick={handleDecrementVote}
+                      disabled={voteDecrementCounter !== 0}
+                    >
+                      {/* Dislike */}
+                      <FontAwesomeIcon
+                        icon={faThumbsDown}
+                        className="thumbsDown"
+                      />
+                    </button>
+                  </div>
                 </div>
 
                 {showComments ? (
@@ -213,7 +220,11 @@ const SingleCard = () => {
                     }}
                     className="button-singleCard"
                   >
-                    Hide Comments
+                    {/* Hide Comments */}
+                    <FontAwesomeIcon
+                      icon={faCommentSlash}
+                      className="thumbsUp"
+                    />
                   </button>
                 ) : (
                   <button
@@ -222,7 +233,8 @@ const SingleCard = () => {
                     }}
                     className="button-singleCard"
                   >
-                    Show Comments
+                    {/* Show Comments */}
+                    <FontAwesomeIcon icon={faComment} className="thumbsUp" />
                   </button>
                 )}
 
@@ -233,8 +245,13 @@ const SingleCard = () => {
                 ) : null}
 
                 {showComments && yourComment ? (
-                  <div>
-                    <label className="nameReq-singleCard">Name:</label>
+                  <div style={{ marginTop: "10px" }}>
+                    <label
+                      className="nameReq-singleCard"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      Name:
+                    </label>
                     <form onSubmit={handlePost}>
                       <input
                         className="input-singleCard"
@@ -246,7 +263,7 @@ const SingleCard = () => {
                         required
                       />
                       <div>
-                        <label>Comment:</label>
+                        <label style={{ fontWeight: "bold" }}>Comment:</label>
                       </div>
                       <textarea
                         onChange={handleChange}
@@ -307,7 +324,7 @@ const SingleCard = () => {
                       }}
                       className="add-comment"
                     >
-                      Add your comment
+                      <FontAwesomeIcon icon={faPlus} /> Add comment
                     </button>
                     <ul>
                       {eachCard.reviews.map((review) => {
@@ -326,6 +343,7 @@ const SingleCard = () => {
                 ) : null}
               </div>
 
+              {/* ///////////////////////////////////////right flexbox container */}
               <div className="right-flexbox-container">
                 <h1> {eachCard?.name}</h1>
                 <strong>Price: </strong>
@@ -360,6 +378,10 @@ const SingleCard = () => {
                 <br />
                 <strong>Description:</strong>{" "}
                 <span>{eachCard?.description}</span>
+                <ButtonToBasket
+                  eachCard={eachCard}
+                  setShowAddedToTheBasketMSG={setShowAddedToTheBasketMSG}
+                />
                 <br />
                 <div className="delivery-container">
                   <strong>Delivery Information: </strong>{" "}
@@ -403,17 +425,12 @@ const SingleCard = () => {
                       <p>• 3-5 Working Day Service - £5.95</p>
                       <p>• 1-2 Working Day Service - £7.95</p>
                       <p>• Next Working Day Service (Order by 2pm) - £10.95</p>
-                      <p>• Saturday Delivery (Order by 2pm Friday) - £14.95</p>
                       <p>• Orders are processed Monday - Friday</p>
                     </div>
                   ) : null}
                 </div>
               </div>
             </div>
-            <ButtonToBasket
-              eachCard={eachCard}
-              setShowAddedToTheBasketMSG={setShowAddedToTheBasketMSG}
-            />
           </div>
         ) : (
           <p>Page is loading...</p>

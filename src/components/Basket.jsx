@@ -94,7 +94,7 @@ const Basket = () => {
               </div>
               <div>
                 <p className="totalPrice-forThisTypeOfWine">
-                  Total: £
+                  Wine cost: £
                   {(Number(item.qty) * Number(item.price.slice(1))).toFixed(2)}
                 </p>
               </div>
@@ -103,7 +103,7 @@ const Basket = () => {
         })}
       </ul>
       {value.basketList.length > 0 ? (
-        <div>
+        <div className="basket-bottom-container">
           <p className="totalBill">Total:£{value.totalBill}</p>
           <Link to="/checkout">
             <button className="OrderBtn">Checkout</button>

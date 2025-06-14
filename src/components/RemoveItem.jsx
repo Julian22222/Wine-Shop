@@ -1,5 +1,7 @@
 import Context from "./Context";
 import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const RemoveItem = (props) => {
   const { item } = props;
@@ -24,7 +26,8 @@ const RemoveItem = (props) => {
   return (
     <div>
       <button onClick={() => handleRemove(item)} className="RemoveItem">
-        Remove item
+        {/* Remove item */}
+        <FontAwesomeIcon icon={faTrashCan} style={{ fontSize: "25px" }} />
       </button>
     </div>
   );

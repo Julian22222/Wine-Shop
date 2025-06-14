@@ -4,19 +4,16 @@
   box-sizing: border-box;
 }
 
-/* .App {
- 
-} */
-
 body {
   width: 100%;
-  height: 100%;
   /* background-color: #282c34; */
-  /* background-color: #36768c; */
-  background-image: url("./IMG/peakpx\ \(21\).jpg");
-  /* backdrop-filter: grayscale(50%); */
-  /* backdrop-filter: blur(5px); */
-  font-family: "roboto";
+  /* background-image: url("./IMG/peakpx\ \(22\).jpg"); */
+
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  /* position: relative; */
+  min-height: 100vh;
+  /* z-index: 0; */
 }
 
 /* //////////////////////Main header  */
@@ -48,13 +45,50 @@ body {
 }
 
 .Sample {
-  margin-bottom: 10px;
+  margin-bottom: 100px;
 }
 
 .SearchBar {
   margin-bottom: 5em;
   margin-left: 100px;
 }
+
+.wine-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* center horizontally */
+  padding: 20px;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./IMG/peakpx\ \(22\).jpg"); /* if in public folder */
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.home-container {
+  padding: 50px;
+}
+
+.NaviBar {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+/* .content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  padding-top: 100px;
+} */
 
 /* .App-header { */
 /* background-color: #282c34; */
