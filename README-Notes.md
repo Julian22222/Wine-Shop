@@ -11,7 +11,35 @@
 - Virtual DOM which is used by React is refreshing much quicker and effective, because he doesn't use recursion to go through all nodes and branches( manually traversing through the parent and child nodes), but it uses Virtual DOM to compare with previous version and updates only those nodes that have been changed.
 
 - React allow us to use syntax mix of JavaScript and HTML which is called JSX (JavaScript extension), JavaScript can be implemented using curly brackets --> {}
-- We can insert many JavaScript data types into React - string, number, array but not an objects and it will throw an Error
+- React JSX can render strings, numbers, booleans (ignored), arrays, and React elements, but cannot render plain objects directly.
+
+```JS
+//Why objects cause an error?
+
+const obj = { name: "Alex" };
+
+function App() {
+  return <h1>{obj}</h1>;
+}
+
+//React will throw an error like:
+//Objects are not valid as a React child
+//This happens because React doesn’t know how to display a plain object.
+
+
+//How to render objects correctly. You must convert objects into renderable values, such as:
+
+//1️⃣ Access object properties
+<h1>{obj.name}</h1>
+
+//2️⃣ Convert object to a string
+<h1>{JSON.stringify(obj)}</h1>
+
+//3️⃣ Map over object values
+{Object.values(obj).map(value => (
+  <p key={value}>{value}</p>
+))}
+```
 
 - Components allow to separate our app on independant and reusable blocks of code. All components names must begin with capital letter to separate them from HTML tags (because they use the same syntax when theya are rendering)
 - Also, components create parent-child relationship and show child components -->
@@ -28,7 +56,7 @@
 
 # Basic React file structure
 
-- public (FOLDER)
+- public (FOLDER) //<-- The public folder is used to store static files (you can keep here -🖼️ Images (logos, icons), 📄 index.html, 🌐 Favicon (favicon.ico), 📜 Manifest files, 🔊 Audio / video files)
 
   - favicon.ico
   - index.html ////<--MAIN, ROOT FILE, STARTING FILE
@@ -40,6 +68,14 @@
   - index..css
   - index.js //<-- connect App.js to render + root, here we can make visualisation of React element inside DOM's root node
   - components //<-- folder, where you keep all components for your website
+
+```JS
+//Files in public can be accessed directly by URL:
+<img src="/logo.png" alt="Logo" />
+
+//Or using an environment variable (CRA):
+<img src={process.env.PUBLIC_URL + "/logo.png"} />
+```
 
 .....................................................................................................
 
@@ -57,11 +93,61 @@ npx create-react-app my-app-name
 - Before you start creating your app you need to think about app design and component location
   Tools: - Excalidraw - Figma - Miro
 
+# Most common snippets /The short letters used to quickly create a function component in React.js
+
+```JS
+1️⃣ rfce
+//Creates a React Function Component with export
+
+import React from 'react'
+
+function ComponentName() {
+  return (
+    <div>ComponentName</div>
+  )
+}
+
+export default ComponentName
+```
+
+```JS
+2️⃣ rfc
+//Creates a React Function Component (without export)
+```
+
+```JS
+3️⃣ rafce
+//Creates a React Arrow Function Component with export
+
+const ComponentName = () => {
+  return (
+    <div>ComponentName</div>
+  )
+}
+
+export default ComponentName
+```
+
+```JS
+4️⃣ rafc
+//Creates a React Arrow Function Component (without export)
+```
+
 # Different types of writing React components
 
 ## React components can be either functional or class based.
 
-[Components](https://react.dev/reference/react/Component)
+Developers mostly use functional components, not class-based components.
+
+Why developers prefer functional components:
+
+    ✅ Simpler and cleaner syntax
+    ✅ Use Hooks (useState, useEffect, etc.) instead of lifecycle methods
+    ✅ Less boilerplate code
+    ✅ Easier to read, test, and reuse logic
+    ✅ Better performance optimizations (conceptually simpler)
+
+[ --> Components <-- ](https://react.dev/reference/react/Component)
 
 1. Function Component
 
@@ -95,6 +181,15 @@ const App =()=>{
 
 export default App;  // <-- export this component, always write this in the bottom of the file component,
 //then we can import App from "./App.jsx" in other component, write this on the top of the file component
+
+
+//In the bottom of component we can use ->
+//export default ComponentName (to exposrt component)  ->   import ComponentName from "./ComponentName" (to import component in different file)
+//OR
+//export const ComponentName = () => {
+//  return <div>ComponentName</div>
+//}
+// --> import { ComponentName } from "./ComponentName"
 ```
 
 2. Class component
