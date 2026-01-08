@@ -997,12 +997,41 @@ import { useParams, Link } from "react-router-dom";
 //and then inside SingleCard component we put --> const {topic_id} = useparams();
 //topic_id will return an object containing the url params
 
-const {topic_id} = useparams();
+const {topic_id} = useParams();
 
-fetch(`http://www.sampleapis.com/wines/${topic_id}`).then((data)=>{data.json()}).then((collection)=>{console.log(collection)})
+fetch(`http://www.sampleapis.com/wines/${topic_id}`).then((data)=>data.json()).then((collection)=>{console.log(collection)})
 .catch((err)=>{
     console.log(err);
 });
+
+//useParams hook helps to get dynamic params from URL -> for example:
+// <Route path="/topics/:topic_id" element={<SingleCard/>} />    <-- useParams hook will get the value of - topic_id
+```
+
+```JS
+//Full working example inside SingleCard
+
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+const SingleCard = () => {
+  const { topic_id } = useParams();
+
+  useEffect(() => {
+    fetch(`https://api.sampleapis.com/wines/${topic_id}`)
+      .then((res) => res.json())
+      .then((collection) => {
+        console.log(collection);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [topic_id]);
+
+  return <div>Check console for data</div>;
+};
+
+export default SingleCard;
 ```
 
 4.  Also, we can use 2 useParams
@@ -1244,7 +1273,7 @@ Example 1
 
 ```JS
 //we create separate component --> Context.jsx
-Context.jsx
+//Context.jsx
 
 import {createContext} from 'react';
 export const ThemeContext = createContext();  //ThemeContext <-- can be any name, Also Context can be created using --> React.createContext()
@@ -1258,7 +1287,7 @@ const [theme,setTheme] = useState('light');
 
 
 return(
-<ThemeContext.Provider value={{theme,setTheme}} >    //ThemeContext -->is the same name from line 863.  theme and setTheme will be available everywhere, globaly in our App
+<ThemeContext.Provider value={{theme,setTheme}} >    //ThemeContext -->is the same name from line 1279.  theme and setTheme will be available everywhere, globaly in our App
 {props....}
 </ThemeContext.Provider>
 );
@@ -1459,13 +1488,15 @@ function MyComponent(){
 
 # Client Side vs Server Side Errors
 
+Server side validation and client side validation
+
 - Sometimes errors that can occur could be dealt with before a request is sent to a backend - client side. Sometimes the only time you can know something is wrong is when the server responds with an error - server side.
 
 - Client Side (Post information like body is missing, The user use URL that is not existing etc. )
 
 - Server Side (the server isn't working, URL is wrong, incorrect Id that user requesting, the user not authorised to access a resource etc.)
 
-# Sorting and Pagination
+# Sorting and other mothods + spread operator
 
 - When render a list of array items or we need to sort some array in React we must not mutate original array (Don't mutate state)
 - To avoid array mutation we need to create a copyb of this array before we start sort, map etc. Therefore we use spread operator --> [...items] <--as example, it will copy all the elements from current array to new the array (create a shallow copy of the array) , whech we can change and use further.
@@ -1625,6 +1656,8 @@ useEffect(() => {
   /items?p=1    <--responds with the first 10 items
 
   /items?p=2    <--responds with items 11 -> 20
+
+  ?_limit=10 and ?limit=10 //are both valid URLs, but only one will work depending on how the server is implemented.
   ```
 
   - Limit / Offset (The client provides how many items they want to receive and where the server should start)
