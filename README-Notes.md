@@ -778,6 +778,57 @@ setData(data=>(
 <input type="range" min="0" max="100" required name="progress" value={data.progress} onChange={handleChange} />
 ```
 
+# Event Handlers
+
+- it is a function that triggers in response to user actions (onClick, onChange, onSubmit, etc)
+- uses camelCase
+
+```JS
+//Can invoke the function using these examples:
+<input type="text" onChange={headleChange } />
+//OR
+<input type="text" onChange={()=>headleChange() } />
+```
+
+```JS
+//Option 1 (✅ Recommended)
+<input type="text" onChange={headleChange} />
+
+// Why this is better:
+
+// React automatically passes the event object to headleChange
+// No unnecessary function creation on each render
+// Cleaner and idiomatic React
+
+
+function headleChange(e) {
+  console.log(e.target.value);
+}
+
+// ✔ Best practice
+// ✔ Better performance
+// ✔ Access to the event
+```
+
+```JS
+// Option 2 (⚠ Works, but usually not needed)
+
+// What’s different:
+
+// You are creating a new function on every render
+// The event object is NOT passed unless you do it explicitly
+// Usually unnecessary unless you need extra logic or parameters
+// If you want the event here, you must write:
+
+
+
+<input type="text" onChange={(e) => headleChange(e)} />
+
+<input
+  type="text"
+  onChange={(e) => headleChange(e, "username")} />
+```
+
 # Forms
 
 ```JS
