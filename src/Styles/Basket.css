@@ -1,101 +1,259 @@
+/* Main Basket Container */
 .Basket {
-  /* text-align: center; */
-  /* height: 100vh; */
-  height: fit-content;
-  margin-left: 100px;
-  margin-right: 100px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5); /* semi-transparent */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
 }
 
-.itemPrice-perBottle {
-  margin-left: 10px;
+.Basket h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2.5em;
 }
 
 .TotalBasket {
-  text-align: left;
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Basket Items List */
+.Basket ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .basketItems {
-  text-align: center;
-  position: relative;
   display: flex;
-  flex-direction: row;
-  box-shadow: 0 4px 4px 0 rgba(248, 239, 239, 0.2);
-  transition: 0.3s;
-  margin-top: 10px;
-  width: 90%;
-  height: 100%;
-  padding: 5px;
+  align-items: center;
+  background-color: #fff;
   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.basketItems:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Section */
+.single-btn-basket {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.card {
+  width: 120px;
+  height: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details Section */
+.basketItems > div:not(.card) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+}
+
+.itemPrice-perBottle {
+  font-size: 1.1em;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
 }
 
 .Quantity {
-  position: absolute;
-  top: 60px;
-  left: 130px;
-  font-size: 20px;
+  font-size: 1.2em;
+  color: #555;
+  margin: 5px 30px;
 }
 
 .QuantityNum {
-  position: absolute;
-  top: 90px;
-  left: 130px;
-  margin-right: 10px;
-  font-size: 25px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #8b0000; /* Burgundy for wine theme */
+  margin: 5px 0;
 }
 
 .QuantityBtn-container {
-  margin-top: 70px;
-  margin-left: -110px;
-  font-size: 25px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .QuantityBtn {
-  padding: 5px;
-  font-size: 25px;
   width: 40px;
-  margin-right: 5px;
-  margin-top: 50px;
-}
-
-.basket-bottom-container {
-  position: relative;
-  margin-top: 80px;
-}
-
-.OrderBtn {
-  position: absolute;
-  bottom: 10px;
-  right: 50px;
-  width: 150px;
-  border: 2px solid black;
-  background-color: white;
-  color: red;
-  padding: 14px 28px;
-  font-size: 16px;
+  height: 40px;
+  border: 2px solid #8b0000;
+  background-color: #fff;
+  color: #8b0000;
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 50%;
   cursor: pointer;
-  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.QuantityBtn:hover:not(:disabled) {
+  background-color: #8b0000;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.QuantityBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .totalPrice-forThisTypeOfWine {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
+  text-align: right;
+}
+
+/* Remove Item Button (assuming it's from RemoveItem component) */
+.basketItems .remove-item-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  text-decoration: underline;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
 }
 
-.MsgOrderHasBeenSent {
-  color: red;
-  font-size: 20px;
-  text-align: center;
+.basketItems .remove-item-btn:hover {
+  background-color: #d32f2f;
 }
 
-.single-btn-basket {
-  background-color: transparent;
-  border: transparent;
-  margin-top: -10px;
+/* Bottom Container */
+.basket-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .totalBill {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.OrderBtn {
+  padding: 15px 30px;
+  background-color: #8b0000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.OrderBtn:hover {
+  background-color: #a52a2a;
+  transform: translateY(-2px);
+}
+
+/* Messages */
+.MsgOrderHasBeenSent {
+  text-align: center;
+  color: #4caf50;
+  font-size: 1.2em;
+  font-weight: bold;
   margin-top: 20px;
-  font-size: 26px;
+  padding: 10px;
+  background-color: #e8f5e8;
+  border-radius: 5px;
+  border: 1px solid #4caf50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Basket {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .Basket h1 {
+    font-size: 2em;
+  }
+
+  .basketItems {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+  }
+
+  .single-btn-basket {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .card {
+    width: 100%;
+    height: 200px;
+  }
+
+  .basketItems > div:not(.card) {
+    height: auto;
+  }
+
+  .basket-bottom-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .totalBill {
+    font-size: 1.5em;
+  }
+
+  .OrderBtn {
+    width: 100%;
+  }
 }

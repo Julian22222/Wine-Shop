@@ -1,207 +1,318 @@
+/* Main Single Card Container */
 .SingleCard {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5); /* semi-transparent */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
-  margin-left: 1%;
-  margin-right: 1%;
-  padding: 10px;
-  box-shadow: 0 4px 4px 0 rgba(248, 239, 239, 0.2);
-  border-radius: 10px;
-  height: 100%;
-  padding-bottom: 50px;
-  margin-bottom: 50px;
-}
-
-.pcs-singleCard {
-  border-radius: 10px;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .main-single-card-container {
-  display: flex;
-  /* flex-basis: 50%; */
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .main-single-card-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .left-flexbox-container {
-  flex-basis: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .right-flexbox-container {
-  /* margin-top: 10px; */
-  margin-left: 20px;
-  margin-right: 100px;
-  flex-basis: 80%;
-}
-
-.delivery-container {
-  margin-top: 50px;
-}
-
-.singleCard-others-buying {
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.delivery-singleCard {
-  margin-left: 5px;
+/* Image */
+.pcs-singleCard {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  height: auto;
 }
 
-.delivery-info {
-  margin-top: 10px;
-}
-
+/* Likes and Dislikes */
 .like-dislike-container {
   display: flex;
-  justify-content: start;
-  margin-left: 5%;
-}
-
-.arrowDown {
-  padding: 5px;
-}
-
-.arrowDown:hover,
-.thumbsUp:hover,
-.thumbsDown:hover {
-  cursor: pointer;
+  gap: 10px;
+  justify-content: center;
 }
 
 .thumbsUp,
 .thumbsDown {
   font-size: 24px;
-  padding: 5px 20px;
+  padding: 10px;
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.thumbsUp:hover {
+  background-color: #4caf50;
+  color: white;
+  transform: scale(1.1);
+}
+
+.thumbsDown:hover {
+  background-color: #f44336;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Comments Section */
 .button-singleCard {
-  position: absolute;
-  /* font-size: 15px; */
-  /* display: flex;
-  justify-content: center; */
-  /* margin-left: 85%; */
-  height: 40px;
-  margin-left: 240px;
-  margin-top: -37px;
-  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
   border-radius: 5px;
-  background-color: lightgreen;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.button-singleCard:hover {
+  background-color: #0b7dda;
 }
 
 .add-comment {
-  display: flex;
-  justify-content: start;
-  margin-left: 10px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 20px;
-  background-color: transparent;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
   border: none;
-  /* margin-left: 85%;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding: 10px; */
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  color: lightgreen;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  align-self: flex-start;
 }
 
-.close-comment-btn {
-  /* position: absolute;
-  margin-left: 1.5%;
-  margin-bottom: 5px; */
-  /* margin-top: -1px; */
-  padding: 10px;
-  background-color: lightcoral;
-  border-radius: 10px;
-}
-
-.post-comment-btn {
-  /* position: absolute; */
-  /* margin-top: 50px;
-  margin-left: 1.5%; */
-  padding: 10px 15px;
-  background-color: lightgreen;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  margin-left: 60%;
-  margin-right: 5px;
+.add-comment:hover {
+  background-color: #45a049;
 }
 
 .noCom {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-style: italic;
+  color: #666;
+  text-align: center;
 }
 
-.input-singleCard {
-  margin-left: 5%;
-  width: 90%;
-  font-size: 18px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+/* Comment Form */
+.input-singleCard,
+.textarea-singleCard {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .textarea-singleCard {
-  margin-left: 5%;
-  width: 90%;
-  height: 100px;
-  font-size: 18px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  resize: vertical;
+  min-height: 80px;
 }
 
+.post-comment-btn,
+.close-comment-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+}
+
+.post-comment-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.post-comment-btn:hover {
+  background-color: #45a049;
+}
+
+.close-comment-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.close-comment-btn:hover {
+  background-color: #da190b;
+}
+
+/* Reviews */
 .eachReview-conatiner {
-  /* display: flex;
-  justify-content: space-around;
-  margin-top: 30px;
-  margin-left: 1%;
-  margin-right: 1%; */
-  padding: 10px;
-  box-shadow: 0 4px 4px 0 rgba(248, 239, 239, 0.2);
-  border: 1px solid rgb(236, 172, 172);
+  background-color: #fff;
+  padding: 15px;
   border-radius: 10px;
-  height: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #2196f3;
+}
+
+.eachReview-conatiner p:first-child {
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
-.card-title-singleCard {
-  /* make all leters upper */
-  text-transform: uppercase;
-  font-size: 10px;
-  padding: 5px;
-  margin-top: 15px;
-  font-weight: 500;
+.reviewLine {
+  margin: 10px 0;
+  font-style: italic;
 }
 
-.card-sub-title-singleCard {
-  /* make each  word first letter -capital */
-  text-transform: capitalize;
-  font-size: 14px;
-  font-weight: 300;
+.eachReview-conatiner p:last-child {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
 }
 
-.card-info-singleCard {
+/* Right Side Details */
+.right-flexbox-container h1 {
+  margin: 0;
+  color: #333;
+  font-size: 2em;
+}
+
+.right-flexbox-container strong {
+  color: #555;
+}
+
+.right-flexbox-container span {
+  color: #777;
+}
+
+.right-flexbox-container br {
+  display: none;
+}
+
+.right-flexbox-container p {
+  line-height: 1.6;
+}
+
+/* Delivery Section */
+.delivery-container {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-singleCard {
+  background: none;
+  border: none;
+  color: #2196f3;
+  cursor: pointer;
   font-size: 16px;
-  line-height: 25px;
-  margin: 20px 0;
-  font-weight: 400;
+  text-decoration: underline;
+}
+
+.delivery-info {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
 .ups {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+/* Others Buying Section */
+.singleCard-others-buying {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+  margin: 40px 0 20px 0;
 }
 
 .othersBuy-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
 }
 
+.othersBuy-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 200px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title-singleCard {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.card-sub-title-singleCard {
+  font-size: 12px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.card-info-singleCard {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+/* Messages */
 .SingleCardMsgBasket {
-  position: absolute;
-  margin-top: -450px;
-  margin-left: 70%;
-  color: rgb(48, 119, 42);
-  font-weight: 500;
-  /* font-size: 10px; */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }

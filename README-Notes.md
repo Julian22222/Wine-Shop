@@ -1931,3 +1931,19 @@ It can be npm packages or browser extensions
 - When we are calling hooks from within our components we must follow the rules of hooks and we must do the same with our custom hooks.
 
 - Custom hooks work exactly like components, the major difference being that they are not responsible for rendering data. Where our components will usually return some JSX (or potentially null) our custom hooks can return data in any form we would like.
+
+```JS
+//filter
+  if (value.wineType === "Red") {
+    value.wineList = value.wineList.filter((element) => {
+      return element.wine === "Red";
+    });
+  }
+
+
+ if (value.SortBy === "year" && value.order === "asc") {
+    value.wineList.sort((a, b) => {
+      return Number(a.year) > Number(b.year) ? -1 : 1;
+    });
+  }
+```

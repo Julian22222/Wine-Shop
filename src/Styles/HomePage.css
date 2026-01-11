@@ -10,6 +10,12 @@
 
 /* ////////////////////////////Home */
 
+.wine-container ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .Border {
   margin: 5px 2px;
   /* margin-bottom: 5px; */
@@ -22,12 +28,23 @@
   cursor: pointer;
 }
 
-.loading-home {
+.loading-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.loading-gif {
+  width: 100px;
+  height: 100px;
+}
+
+.loading-home {
+  margin-top: 20px;
+  font-size: 1.2em;
   color: #ccc;
-  margin-top: 50px;
-  margin-bottom: 1000px;
 }
 
 /* //////////////////SearchBar */

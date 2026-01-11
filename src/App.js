@@ -68,16 +68,18 @@ function App() {
           <div className="background" />
           <Homepage />
           <NavBar />
-          <Routes>
-            <Route path="/Wine-Shop" element={<Home />} />
-            <Route path="/wines/:_id" element={<SingleCard />} />
-            <Route
-              path="/basket"
-              element={<Basket basketList={basketList} />}
-            />
-            <Route path="/requests" element={<Requests />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-          </Routes>
+          <main className="main-content">
+            <Routes>
+              <Route path="/Wine-Shop" element={<Home />} />
+              <Route path="/wines/:_id" element={<SingleCard />} />
+              <Route
+                path="/basket"
+                element={<Basket basketList={basketList} />}
+              />
+              <Route path="/requests" element={<Requests />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+            </Routes>
+          </main>
           <Footer />
         </div>
       </Context.Provider>

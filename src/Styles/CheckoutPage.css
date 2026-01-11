@@ -1,69 +1,196 @@
+/* Checkout Page Styles */
+
 .Checkout-head {
   display: flex;
   justify-content: center;
   margin-top: 50px;
   margin-bottom: 50px;
-}
-
-.whole-container {
-  padding: 10px;
-  border: 2px solid;
-  margin-left: 10px;
-  width: 500px;
-}
-
-.totalOrder-container {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  margin-left: 20px;
-}
-
-.checkout-container {
-  margin-top: 30px;
-  /* width: 50%; */
-}
-
-.border-container {
-  padding: 10px;
-  border: 2px solid;
-  margin: 10px;
-  /* width: 50%; */
-}
-
-.border-container-head-text {
-  font-size: 20px;
-  font-weight: bold;
-  position: absolute;
-  margin-top: -20px;
-  margin-left: 20px;
-  background-color: #36768c;
-  padding: 0 10px;
-}
-
-.payment-container-checkout {
-  position: absolute;
-  background-color: antiquewhite;
-  color: green;
-  /* display: flex; */
-  justify-content: center;
-  /* text-align: center; */
-  padding: 50px;
-  margin-top: -300px;
-  margin-left: 30%;
-}
-
-.tick-checkout {
-  font-size: 35px;
-  margin-left: 40%;
+  font-family: "Georgia", serif;
+  font-size: 2.5rem;
+  color: #722f37; /* Burgundy color for wine theme */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .main-checkout {
   display: flex;
   justify-content: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.whole-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 20px;
+}
+
+.checkout-container {
+  margin-bottom: 30px;
+}
+
+.border-container {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.border-container-head-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background-color: white;
+  padding: 0 10px;
+  color: #722f37;
+  font-family: "Arial", sans-serif;
 }
 
 .checkout-payment-input,
 .checkout-delivery-input {
   margin-right: 10px;
+  accent-color: #722f37; /* Custom radio button color */
+}
+
+.checkout-payment,
+.checkout-label {
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.checkout-payment:hover,
+.checkout-label:hover {
+  color: #722f37;
+}
+
+/* Shipping Info Inputs */
+.border-container input {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.border-container input:focus {
+  border-color: #722f37;
+  outline: none;
+  box-shadow: 0 0 5px rgba(114, 47, 55, 0.3);
+}
+
+.border-container label {
+  font-weight: bold;
+  color: #555;
+  margin-top: 10px;
+  display: block;
+}
+
+/* Total Order Container */
+.totalOrder-container {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f4e4bc; /* Cream color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.totalOrder-container h3,
+.totalOrder-container h1 {
+  color: #722f37;
+  margin: 10px 0;
+}
+
+.totalOrder-container p {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.totalOrder-container button {
+  padding: 12px 24px;
+  background-color: #722f37;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.totalOrder-container button:hover {
+  background-color: #5a1f29;
+}
+
+/* Error Messages */
+.border-container p[style*="color: red"] {
+  color: #d9534f !important;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Payment Success Container (if uncommented) */
+.payment-container-checkout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d4edda;
+  color: #155724;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+}
+
+.tick-checkout {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #28a745;
+}
+
+.payment-container-checkout h2 {
+  margin-bottom: 10px;
+}
+
+.payment-container-checkout span {
+  display: block;
+  margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .whole-container {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .Checkout-head {
+    font-size: 2rem;
+  }
+
+  .totalOrder-container button {
+    position: static;
+    margin-top: 20px;
+    width: 100%;
+  }
 }
