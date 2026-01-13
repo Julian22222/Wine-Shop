@@ -4,11 +4,11 @@
 - DOM represents web page to allow programm amend, change document structure, style and content.
 - DOM represents document as nodes and objects. Therefore different programming languages can connect to this web page.
 - The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript.
-- The DOM has a tree structure, tree starts from root node which is document.documentElement or HTML teg and then it branches out.
+- The DOM has a tree structure, tree starts from root node which is document.documentElement (<html>) and then it branches out.
 
 - DOM relatively slow in refreshing due to tree structure, which is needed recursion.
-- React gives opportunity to developers to work with virtual DOM.
-- Virtual DOM which is used by React is refreshing much quicker and effective, because he doesn't use recursion to go through all nodes and branches( manually traversing through the parent and child nodes), but it uses Virtual DOM to compare with previous version and updates only those nodes that have been changed.
+- React gives opportunity to developers to work with virtual DOM. React creates a lightweight, in-memory representation of the UI.
+- Virtual DOM (VDOM) which is used by React is refreshing much quicker and effective, because he doesn't use recursion to go through all nodes and branches( manually traversing through the parent and child nodes), but it uses Virtual DOM to compare with previous version and updates only those nodes that have been changed.
 
 - React allow us to use syntax mix of JavaScript and HTML which is called JSX (JavaScript extension), JavaScript can be implemented using curly brackets --> {}
 - React JSX can render strings, numbers, booleans (ignored), arrays, and React elements, but cannot render plain objects directly.
@@ -41,7 +41,14 @@ function App() {
 ))}
 ```
 
-- Components allow to separate our app on independant and reusable blocks of code. All components names must begin with capital letter to separate them from HTML tags (because they use the same syntax when theya are rendering)
+- Components allow to separate our app on independant and reusable blocks of code. All components names must begin with Capital Letter (PascalCase) to separate them from HTML tags (because they use the same syntax when theya are rendering)
+
+```JS
+<div />, <span /> //<-- HTML elements
+
+<MyComponent />  //<-- Components
+```
+
 - Also, components create parent-child relationship and show child components -->
   App
 
@@ -780,12 +787,18 @@ setData(data=>(
 
 # Event Handlers
 
+in React.js, onClick, onSubmit, and onChange are event handler props (often called event handlers for short).
+
 - it is a function that triggers in response to user actions (onClick, onChange, onSubmit, etc)
 - uses camelCase
 
 ```JS
+const headleChange =()=>{
+  console.log("Button clicked");
+}
+
 //Can invoke the function using these examples:
-<input type="text" onChange={headleChange } />
+<input type="text" onChange={headleChange} />
 //OR
 <input type="text" onChange={()=>headleChange() } />
 ```
@@ -860,8 +873,19 @@ return(
 </form>
 );
 };
-
 ```
+
+### ⭐ Most Common used EVENT HADLERS
+
+- onClick
+- onChange
+- onSubmit
+- onFocus
+- onBlur
+- onKeyDown
+- onMouseEnter / onMouseLeave
+- onScroll
+- and many others
 
 # useEffect Data Fetching
 
@@ -1925,12 +1949,99 @@ It can be npm packages or browser extensions
 
 # Custom Hooks
 
+A custom hook in React is your own hook — a reusable function that starts with use and uses other React hooks to share logic between components.
+
+A custom hooks - are function, They reuse logic, not UI, They can use other hooks, They make code cleaner and reusable
+
 - In React we have been using some in built hooks to add functionality to our components. React also supports writing our own custom hooks to extract component logic into re-useable functions.
 
 - Custom hook is a function, whose name starts with "use" and can call other hooks within itself.
 - When we are calling hooks from within our components we must follow the rules of hooks and we must do the same with our custom hooks.
 
 - Custom hooks work exactly like components, the major difference being that they are not responsible for rendering data. Where our components will usually return some JSX (or potentially null) our custom hooks can return data in any form we would like.
+
+```JS
+                  Custom hook vs component
+
+Custom Hook                |    Component
+
+Reuses logic               |    Reuses UI
+Returns values/functions   |    Returns JSX
+Starts with use            |    Starts with capital letter
+```
+
+Custom Hook = reusable stateful logic extracted from components. It lets you reuse logic, not UI
+
+### Why custom hooks exist?
+
+Without custom hooks, you might repeat logic like:
+
+- fetching data
+- form handling
+- window resize tracking
+- authentication logic
+- Custom hooks let you write that logic once and reuse it everywhere.
+
+### When to create a custom hook
+
+Create one when:
+
+logic is reused in multiple components
+a component becomes too large
+you want to separate logic from UI
+
+### With a custom hook
+
+```JS
+function useCounter(initialValue = 0) {
+  const [count, setCount] = React.useState(initialValue);
+  const increment = () => setCount(c => c + 1);
+
+  return { count, increment };
+}
+
+//Usage:
+function Counter() {
+  const { count, increment } = useCounter(0);
+
+  return <button onClick={increment}>{count}</button>;
+}
+
+//🔹 Key rules of custom hooks
+//✅ Must start with use
+//✅ Can use other hooks in your custom hook->
+//useState,useEffect,useContext,useRef,useReducer, etc
+```
+
+```JS
+//Real-world example: useFetch  <-- custom hook
+
+function useFetch(url) {
+  const [data, setData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading };
+}
+
+//Usage:
+function Users() {
+  const { data, loading } = useFetch("/api/users");
+
+  if (loading) return "Loading...";
+  return <pre>{JSON.stringify(data)}</pre>;
+}
+```
+
+# Old code
 
 ```JS
 //filter
@@ -1946,4 +2057,50 @@ It can be npm packages or browser extensions
       return Number(a.year) > Number(b.year) ? -1 : 1;
     });
   }
+```
+
+```JS
+//NavBar
+{items.map((item) => {
+          return item === "home" ? (
+            <li key={item} className="NavBar">
+              <NavLink
+                to="/Wine-Shop"
+                className="NavBar-link"
+                onClick={handleHome}
+              >
+                {" "}
+                {item}
+              </NavLink>
+            </li>
+          ) : item === "requests" ? (
+            <li key={item} className="NavBar">
+              <NavLink to="requests" className="NavBar-link">
+                {item}
+              </NavLink>
+            </li>
+          ) : (
+            <li key={item} className="NavBar">
+              <NavLink to="basket" className="NavBar-link">
+                {item}
+              </NavLink>
+            </li>
+          );
+        })}
+```
+
+```JS
+const allComments = [
+  {user: "John", region: "London", comments: "adadada"},
+  {user: "Mike", region: "Stockport", comments: "dadada"},
+  {user: "Adam", region: "Manchester", comments: "ytyty"}
+]
+
+//destructurisation of the items
+allComments.map(({ user, region, comments }, index) => (
+    {user}
+    {region}
+    {comments}
+  }
+
 ```

@@ -1,3 +1,4 @@
+import "../Styles/SingleCard.css";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Context from "./Context";
@@ -21,7 +22,6 @@ const SingleCard = () => {
 
   //data for each card
   const [eachCard, setEachCard] = useState([]);
-  // const [whatOthersBuy, setWhatOthersBuy] = useState([]);
 
   // delivery info btn
   const [showDelivery, setShowDelivery] = useState(false);
@@ -48,12 +48,9 @@ const SingleCard = () => {
   const handleSingleCard = () => {
     value.setWhatOthersBuy([]);
 
-    //what others are buying, get random 10 wines
-    for (let i = 0; i < 10; i++) {
+    // what others are buying, get random 7 wines
+    for (let i = 0; i < 7; i++) {
       let randomIndex = Math.floor(Math.random() * value.wineList.length);
-      // console.log("Random Index", randomIndex);
-      // console.log("All wine list", value.wineList);
-      // setWhatOthersBuy(whatOthersBuy, value.wineList[randomIndex]);
 
       value.setWhatOthersBuy((prevArray) => [
         ...prevArray,
@@ -128,10 +125,6 @@ const SingleCard = () => {
       .catch((err) => {
         console.log(err);
       });
-    // setCommentsIsLoading(false);
-    // setCommentIsPosted(true).catch((err) => {
-    //   setErr("Your comment request timed out, please try again.");
-    // });
 
     setReviewPost({ name: "", text: "" });
     setYourComment(false);
@@ -163,19 +156,12 @@ const SingleCard = () => {
     fetch(`https://wine-shop-backend.onrender.com/wines/${_id}`)
       .then((topicData) => topicData.json())
       .then((data) => {
-        // console.log(data);
-        // console.log(setEachCard(data));
         setEachCard(data);
-        // console.log(eachCard);
       });
   }, [_id, eachCard.reviews]);
 
   return (
     <div>
-      {/* //put ternary operator ->  eachCard ? <p>......<p> : <p>Page is Loading</p> */}
-      {/* <p>Wine: {eachCard.wine?.slice(0, -4)}</p> */}
-      {/* {eachCard.wine ?  */}
-
       <div className="SingleCard">
         {eachCard?.name ? (
           <div key={(eachCard.name, eachCard.location)}>
@@ -442,12 +428,12 @@ const SingleCard = () => {
       </h2>
 
       <div className="othersBuy-container">
-        <ul>
+        <ul className="ob-container">
           {value.whatOthersBuy?.map((item) => {
             return (
               <Link to={`/wines/${item._id}`} className="Border">
                 <button onClick={handleSingleCard} className="single">
-                  <li key={(item._id, item.winery)}>
+                  <li key={item._id}>
                     <div className="card">
                       <img
                         src={item.image}

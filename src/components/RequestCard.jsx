@@ -1,6 +1,6 @@
 const RequestCard = (props) => {
   return (
-    <div className="RequestCard">
+    <div className="requestCard">
       <span style={{ color: "white", fontWeight: "bolder" }}>User : </span>
       <span>{props.user_name}</span>
       <br />

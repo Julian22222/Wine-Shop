@@ -1,3 +1,4 @@
+import "../Styles/Basket.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Context from "./Context";
@@ -22,7 +23,7 @@ const Basket = () => {
       <ul>
         {value.basketList.map((item) => {
           return (
-            <li key={(item.id, item.image)} className="basketItems">
+            <li key={item.id} className="basketItems">
               <Link to={`/wines/${item._id}`} className="Border">
                 <button className="single-btn-basket">
                   <div className="card">
@@ -41,7 +42,7 @@ const Basket = () => {
               <p className="itemPrice-perBottle">{item.price} per bottle</p>
               <p className="Quantity">Quantity:</p>
               <br />
-              {/* <p className="QuantityNum">{Number(item.qty) + Number(count)}</p> */}
+
               <p className="QuantityNum">{Number(item.qty)}</p>
               <div className="QuantityBtn-container">
                 <button
@@ -52,7 +53,6 @@ const Basket = () => {
                     setUpdateQty((prevState) => {
                       return prevState - 1;
                     });
-                    // item.total = (item.qty * item.price.slice(1)).toFixed(2);
 
                     //set total Bill
                     value.setTotalBill((prevData) => {
@@ -76,8 +76,6 @@ const Basket = () => {
                     setUpdateQty((prevState) => {
                       return prevState + 1;
                     });
-
-                    // item.total = (item.qty * item.price.slice(1)).toFixed(2);
 
                     //set total Bill
                     value.setTotalBill((prevData) => {
@@ -110,8 +108,6 @@ const Basket = () => {
           </Link>
         </div>
       ) : null}
-
-      {/* <p> button Order appears when basketList.length more than 0 </p> */}
     </div>
   );
 };

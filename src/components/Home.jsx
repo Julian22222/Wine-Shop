@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import WineCard from "./WineCard";
 import Context from "./Context";
@@ -7,17 +7,17 @@ import SearchBar from "./SearchBar";
 import loadingGif from "../IMG/loading.gif";
 
 const Home = () => {
-  const value = useContext(Context);
+  const { setWhatOthersBuy, wineList, setWineList, wineType, sortBy, order } =
+    useContext(Context);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleCard = (event) => {
-    value.setWhatOthersBuy([]);
+    setWhatOthersBuy([]);
     // What others are buying, get random 10 wines
-    for (let i = 0; i < 10; i++) {
-      let randomIndex = Math.floor(Math.random() * value.wineList.length);
-      value.setWhatOthersBuy((prevArray) => [
-        ...prevArray,
-        value.wineList[randomIndex],
-      ]);
+    for (let i = 0; i < 7; i++) {
+      let randomIndex = Math.floor(Math.random() * wineList.length);
+      setWhatOthersBuy((prevArray) => [...prevArray, wineList[randomIndex]]);
     }
   };
 
@@ -25,12 +25,13 @@ const Home = () => {
     fetch("https://wine-shop-backend.onrender.com/wines")
       .then((allWines) => allWines.json())
       .then((data) => {
-        value.setWineList(data);
+        setWineList(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [value.wineType, value.SortBy, value.order]);
+  }, []);
 
   // Filtering logic
   const filterFunctions = {
@@ -50,35 +51,40 @@ const Home = () => {
   };
 
   const processedWineList = useMemo(() => {
-    let list = [...value.wineList];
+    let list = [...wineList];
 
     // Filter
-    if (filterFunctions[value.wineType]) {
-      list = list.filter(filterFunctions[value.wineType]);
+    if (filterFunctions[wineType]) {
+      list = list.filter(filterFunctions[wineType]);
     }
 
     // Sort
-    if (sortFunctions[value.SortBy]) {
-      list.sort(sortFunctions[value.SortBy]);
-      if (value.order === "desc") {
+    if (sortFunctions[sortBy]) {
+      list.sort(sortFunctions[sortBy]);
+      if (order === "desc") {
         list.reverse();
       }
     }
 
     return list;
-  }, [value.wineList, value.wineType, value.SortBy, value.order]);
+  }, [wineList, wineType, sortBy, order]);
 
   return (
-    <div>
+    <>
       <SearchBar />
 
-      {processedWineList.length > 0 ? (
+      {isLoading ? (
+        <div className="loading-container">
+          <img src={loadingGif} alt="loading-gif" className="loading-gif" />
+          <p className="loading-home">Loading...</p>
+        </div>
+      ) : (
         <div className="wine-container">
           <ul>
             {processedWineList.map((item) => (
-              <Link to={`/wines/${item._id}`} className="Border" key={item._id}>
-                <button onClick={handleCard} className="single">
-                  <li>
+              <li key={item._id} className="Border">
+                <Link to={`/wines/${item._id}`}>
+                  <button onClick={handleCard} className="single">
                     <WineCard
                       name={item.name}
                       wine={item.wine}
@@ -88,19 +94,14 @@ const Home = () => {
                       image={item.image}
                       id={item._id}
                     />
-                  </li>
-                </button>
-              </Link>
+                  </button>
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
-      ) : (
-        <div className="loading-container">
-          <img src={loadingGif} alt="loading-gif" className="loading-gif" />
-          <p className="loading-home">Loading...</p>
-        </div>
       )}
-    </div>
+    </>
   );
 };
 

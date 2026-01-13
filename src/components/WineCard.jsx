@@ -1,24 +1,20 @@
-const WineCard = (props) => {
+import "../Styles/WineCard.css";
+
+const WineCard = ({ name, wine, rating, image }) => {
   return (
     <div className="card">
-      {/* <div className="Card"> */}
-      {/* <p>Name: {props.name}</p>
-        <p>Wine: {props.wine}</p>
-        <p>Rating: {props.rating}</p> */}
-      {/* <p>Votes: {props.votes}</p> */}
-      {/* <p>Location: {props.location}</p> */}
-      {/* </div> */}
       <img
-        src={props.image}
-        alt="different wines"
+        src={image}
+        alt={`${name} wine`}
         width="195"
         height="300"
         className="card-img"
+        loading="lazy"
       />
       <div className="card-body">
-        <h1 className="card-title">{props.name}.</h1>
-        <p className="card-sub-title">{props.wine} wine.</p>
-        <p className="card-info">{props.rating}</p>
+        <h2 className="card-title">{name}.</h2>
+        <p className="card-sub-title">{wine} wine.</p>
+        <p className="card-info">{rating} /5</p>
       </div>
     </div>
   );

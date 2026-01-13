@@ -262,6 +262,11 @@
   margin: 0;
 }
 
+.ob-container {
+  display: flex;
+  justify-content: center;
+}
+
 .card {
   background-color: #fff;
   border-radius: 10px;

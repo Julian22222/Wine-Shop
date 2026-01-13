@@ -1,3 +1,4 @@
+import "../Styles/ButtonToBasket.css";
 import Context from "./Context";
 import { useContext } from "react";
 import { useState } from "react";
@@ -36,13 +37,6 @@ const ButtonToBasket = (props) => {
       }, 2000);
     } else {
       value.setBasketList([props.eachCard, ...value.basketList]);
-      // console.log(props.eachCard);
-      // value.setBasketList(props.eachCard);
-      // console.log(props.quantity);
-      // console.log("quantity", quantity);
-      // console.log("basketList", value.basketList);
-      // console.log("props.eachCard.qty", props.eachCard.qty);
-      // console.log("value.msgAlreadyInTheBasket", value.msgAlreadyInTheBasket);
 
       props.setShowAddedToTheBasketMSG(true);
 
@@ -55,11 +49,8 @@ const ButtonToBasket = (props) => {
       return (Number(prevData) + Number(props.eachCard.total)).toFixed(2);
     });
 
-    // console.log("Total price for this wine", props.eachCard.total);
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////
   };
-  //   console.log(value.basketList);
 
   return (
     <div className="qty-container">

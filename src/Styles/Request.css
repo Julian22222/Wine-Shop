@@ -105,7 +105,7 @@
 }
 
 /* Request List Section */
-.RequestListArea {
+.requestListArea {
   text-align: center;
   font-size: 1.8em;
   color: #333;
@@ -113,7 +113,7 @@
   font-weight: bold;
 }
 
-.RequestListArea + ul {
+.requestListArea + ul {
   list-style: none;
   padding: 0;
   display: flex;
@@ -124,7 +124,7 @@
 }
 
 /* Request Card */
-.RequestCard {
+.requestCard {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -133,38 +133,38 @@
   border-left: 5px solid #8b0000;
 }
 
-.RequestCard:hover {
+.requestCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.RequestCard span:first-child {
+.requestCard span:first-child {
   font-weight: bold;
   color: #8b0000;
 }
 
-.RequestCard span:nth-child(2),
-.RequestCard span:nth-child(4),
-.RequestCard span:nth-child(6) {
+.requestCard span:nth-child(2),
+.requestCard span:nth-child(4),
+.requestCard span:nth-child(6) {
   color: #555;
   margin-left: 5px;
 }
 
-.RequestCard br {
+.requestCard br {
   display: none;
 }
 
-.RequestCard > div {
+.requestCard > div {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.RequestCard > div > span {
+.requestCard > div > span {
   display: block;
 }
 
-.RequestCard > div > span:first-child::after {
+.requestCard > div > span:first-child::after {
   content: ": ";
   font-weight: normal;
 }

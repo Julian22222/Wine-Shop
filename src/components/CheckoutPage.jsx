@@ -1,22 +1,19 @@
+import "../Styles/CheckoutPage.css";
 import Context from "./Context";
 import { useState, useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import useTransaction from "../hooks/useTransaction"; // Import the custom hook
 
 const CheckoutPage = () => {
   const value = useContext(Context);
 
   const navigate = useNavigate();
 
-  // show payment seccesfull block
-  const [msgSendOrder, setMsgSendOrder] = useState(false);
-
-  const [transactionNr, setTransactionNr] = useState("");
-
   const [paymentOption, setPaymentOption] = useState("");
   const [deliveryMethod, setDeliveryMethod] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { transactionNr } = useTransaction(); // Use the custom hook to get transaction number
 
   let totalOrder = Number(value.totalBill) + Number(deliveryMethod);
 
@@ -24,24 +21,6 @@ const CheckoutPage = () => {
     e.preventDefault();
 
     value.setBasketList([]);
-
-    // random transactionNr creation - 2 Letters + 10 numbers
-    const arrLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-
-    for (let i = 0; i < 2; i++) {
-      const index = Math.floor(Math.random() * 10); //random nr from 0 -9
-      setTransactionNr((prevNr) => {
-        return prevNr + arrLetters[index];
-      });
-    }
-
-    const arrNr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    for (let i = 0; i < 10; i++) {
-      const index = Math.floor(Math.random() * 10);
-      setTransactionNr((prevNr) => {
-        return prevNr + arrNr[index];
-      });
-    }
 
     if (!paymentOption) {
       setFormSubmitted(true); // show error
@@ -55,9 +34,11 @@ const CheckoutPage = () => {
 
     // handle valid form submission
     alert(
-      `Payment successful!\nPayment method: ${paymentOption}\nDelivery cost: £${deliveryMethod}\nTotal order: £${
+      `Payment successful!\nPayment method: ${paymentOption}\nDelivery cost: £${deliveryMethod}\nTotal order: £${(
         Number(value.totalBill) + Number(deliveryMethod)
-      }\nTransaction Nr.: ${transactionNr}\nThank you for your order!`
+      ).toFixed(
+        2
+      )}\nTransaction Nr.: ${transactionNr}\nThank you for your order!`
     );
 
     navigate("/Wine-Shop"); // Navigate to home page after successful payment, after pressing Ok in alert
@@ -257,10 +238,6 @@ const CheckoutPage = () => {
                   id="3-5workDays"
                   name="deliveryMethod"
                   value="5.95"
-                  // checked
-                  // onClick={() => {
-                  //   setDeliveryCost(5.95);
-                  // }}
                   onChange={(e) => {
                     setDeliveryMethod(e.target.value);
                   }}
@@ -278,9 +255,6 @@ const CheckoutPage = () => {
                   id="1-2workDays"
                   name="deliveryMethod"
                   value="7.95"
-                  // onClick={() => {
-                  //   setDeliveryCost(7.95);
-                  // }}
                   onChange={(e) => {
                     setDeliveryMethod(e.target.value);
                   }}
@@ -336,27 +310,6 @@ const CheckoutPage = () => {
             </button>
           </div>
         </form>
-
-        {/* <p>when you click on Pay button - basketList - become empty, show message your order has been sent</p>  */}
-
-        {/* {msgSendOrder ? (
-          <div className="payment-container-checkout">
-            <FontAwesomeIcon icon={faCircleCheck} className="tick-checkout" />
-            <h2>Payment successful!</h2>
-            <p>Hooray! You have completed your payment.</p>
-            <hr style={{ marginBottom: 20 }} />
-            <span style={{ fontWeight: "bold", color: "black" }}>
-              Transaction Nr.:
-            </span>{" "}
-            <span>{transactionNr}</span>
-            <br />
-            <span style={{ fontWeight: "bold", color: "black" }}>
-              Amount Paid:
-            </span>{" "}
-            <span>£{value.totalBill}</span>
-            <br />
-          </div>
-        ) : null} */}
       </div>
     </div>
   );

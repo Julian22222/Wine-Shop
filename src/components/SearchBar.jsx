@@ -6,26 +6,20 @@ const SearchBar = () => {
 
   const handleType = (event) => {
     value.setWineType(event.target.value);
-    // console.log(event.target.value);
-    // console.log(value.wineType);
   };
 
   const handleSortBy = (event) => {
-    // console.log(event.target.value);
     value.setSortBy(event.target.value);
-    // console.log(value.SortBy);
   };
 
   const handleOrder = (event) => {
-    // console.log(event.target.value);
     value.setOrder(event.target.value);
-    // console.log(value.order);
   };
 
   return (
     <div className="SearchBar">
       <label style={{ fontSize: 20, fontWeight: "bolder" }}>Wine Type: </label>
-      <select onChange={handleType} name="SortBy" className="SortBy">
+      <select onChange={handleType} name="wineType" className="wine-type">
         <option value=""></option>
         <option value="Red">Red</option>
         <option value="White">White</option>
@@ -36,13 +30,17 @@ const SearchBar = () => {
 
       <span
         className="sort-block"
-        style={{ fontSize: 20, fontWeight: "bolder" }}
+        style={{
+          fontSize: 20,
+          fontWeight: "bolder",
+          marginLeft: 15,
+          marginRight: 5,
+        }}
       >
-        {" "}
-        Sort By:{" "}
+        Sort By:
       </span>
       <select onChange={handleSortBy}>
-        <option></option>
+        <option value=""></option>
         <option value="reviews">Reviews</option>
         <option value="rating">Rating</option>
         <option value="year">Year</option>
@@ -51,10 +49,14 @@ const SearchBar = () => {
 
       <span
         className="order-block"
-        style={{ fontSize: 20, fontWeight: "bolder" }}
+        style={{
+          fontSize: 20,
+          fontWeight: "bolder",
+          marginLeft: 15,
+          marginRight: 5,
+        }}
       >
-        {" "}
-        Order:{" "}
+        Order:
       </span>
       <select onChange={handleOrder}>
         <option></option>

@@ -1,35 +1,23 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import { React, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import "./App.css";
-import "./Styles/HomePage.css";
-import "./Styles/WineCard.css";
-import "./Styles/NavBar.css";
-import "./Styles/SingleCard.css";
-import "./Styles/ButtonToBasket.css";
-import "./Styles/Footer.css";
-import "./Styles/Basket.css";
-import "./Styles/RemoveItem.css";
-import "./Styles/Request.css";
-import "./Styles/CheckoutPage.css";
 
-import Homepage from "./components/Homepage";
+import Banner from "./components/Banner";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
-import SearchBar from "./components/SearchBar";
 import Basket from "./components/Basket";
 import Requests from "./components/Requests";
 import SingleCard from "./components/SingleCard";
 import Footer from "./components/Footer";
 import Context from "./components/Context";
-import Checkout from "./components/CheckoutPage";
 import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
   //all wine list
   const [wineList, setWineList] = useState([]);
   const [wineType, setWineType] = useState("");
-  const [SortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("");
   const [order, setOrder] = useState("");
   const [basketList, setBasketList] = useState([]);
 
@@ -47,7 +35,7 @@ function App() {
     setWineList,
     wineType,
     setWineType,
-    SortBy,
+    sortBy,
     setSortBy,
     order,
     setOrder,
@@ -66,16 +54,13 @@ function App() {
       <Context.Provider value={value}>
         <div className="App-header">
           <div className="background" />
-          <Homepage />
+          <Banner />
           <NavBar />
           <main className="main-content">
             <Routes>
               <Route path="/Wine-Shop" element={<Home />} />
               <Route path="/wines/:_id" element={<SingleCard />} />
-              <Route
-                path="/basket"
-                element={<Basket basketList={basketList} />}
-              />
+              <Route path="/basket" element={<Basket />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/checkout" element={<CheckoutPage />} />
             </Routes>

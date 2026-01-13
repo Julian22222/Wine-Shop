@@ -1,4 +1,4 @@
-.NaviBar {
+.navbar-container {
   font-size: 18px;
   text-transform: uppercase;
   /* display: flex; */
@@ -8,7 +8,7 @@
   height: 60px;
 }
 
-.NavBar {
+.nav-item {
   color: white;
   list-style-type: none;
   /* display: flex; */
@@ -23,7 +23,7 @@
   justify-content: flex-end;
 }
 
-.NavBar-link {
+.navBar-link {
   color: black;
   font-weight: bolder;
 }

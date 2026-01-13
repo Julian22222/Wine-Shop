@@ -1,10 +1,14 @@
-/* //////////////////////////HomePage */
-.Header-colour {
+/* //////////////////////////Banner */
+.home-container {
+  padding: 50px;
+}
+
+.header-main {
   text-align: center;
   color: blanchedalmond;
 }
 
-.Header {
+.header-second {
   text-align: center;
 }
 
