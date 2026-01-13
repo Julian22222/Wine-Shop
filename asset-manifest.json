@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/Wine-Shop/static/css/main.a64c5fa4.css",
-    "main.js": "/Wine-Shop/static/js/main.5e969f73.js",
+    "main.css": "/Wine-Shop/static/css/main.7b7c838a.css",
+    "main.js": "/Wine-Shop/static/js/main.d9ed7b72.js",
     "static/media/peakpx (22).jpg": "/Wine-Shop/static/media/peakpx (22).3ba9e394d9b304ad023e.jpg",
     "static/media/loading.gif": "/Wine-Shop/static/media/loading.7d4a8b824bc42e938015.gif",
     "static/media/instagram.png": "/Wine-Shop/static/media/instagram.e719d8b29f452a16302d.png",
     "static/media/ups.png": "/Wine-Shop/static/media/ups.bceb546812184ed4f73d.png",
-    "static/media/paypal .png": "/Wine-Shop/static/media/paypal .22b740f777bdc0efc652.png",
+    "static/media/paypal.png": "/Wine-Shop/static/media/paypal.22b740f777bdc0efc652.png",
     "static/media/googlePay.png": "/Wine-Shop/static/media/googlePay.cadee8cdb0c0afb1a713.png",
     "static/media/x.png": "/Wine-Shop/static/media/x.e4f83bef4191a65e9c7d.png",
     "static/media/mail-inbox-app.png": "/Wine-Shop/static/media/mail-inbox-app.a59cf70de696df2f50d1.png",
@@ -16,11 +16,11 @@
     "static/media/masterCard.png": "/Wine-Shop/static/media/masterCard.8ab93d6d024df326004d.png",
     "static/media/apple-pay.png": "/Wine-Shop/static/media/apple-pay.c05c5dbb2291b539538d.png",
     "index.html": "/Wine-Shop/index.html",
-    "main.a64c5fa4.css.map": "/Wine-Shop/static/css/main.a64c5fa4.css.map",
-    "main.5e969f73.js.map": "/Wine-Shop/static/js/main.5e969f73.js.map"
+    "main.7b7c838a.css.map": "/Wine-Shop/static/css/main.7b7c838a.css.map",
+    "main.d9ed7b72.js.map": "/Wine-Shop/static/js/main.d9ed7b72.js.map"
   },
   "entrypoints": [
-    "static/css/main.a64c5fa4.css",
-    "static/js/main.5e969f73.js"
+    "static/css/main.7b7c838a.css",
+    "static/js/main.d9ed7b72.js"
   ]
 }
