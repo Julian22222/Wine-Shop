@@ -12,6 +12,7 @@ import SingleCard from "./components/SingleCard";
 import Footer from "./components/Footer";
 import Context from "./components/Context";
 import CheckoutPage from "./components/CheckoutPage";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   //all wine list
@@ -63,6 +64,7 @@ function App() {
               <Route path="/basket" element={<Basket />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </main>
           <Footer />

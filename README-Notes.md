@@ -1122,7 +1122,6 @@ headers: {
 - Another feature is to add queries to the end of our endpoints to provide additional functionality.
 - Usually this is used in search strings or optional filtering options.
 - React router will also parse any queries and make them available via the useSearchParams hook.
-
 - if we make request to /topics?sort_by=title , in this occasion we will receive an access to requests, which are called searchParams
 - queries are optional and adding to an endpoint doesn't change the path. Therefore our path will still be the same -->
 
@@ -1202,6 +1201,62 @@ return(
 };
 ```
 
+```JS
+//in this example:
+//const [searchParams, setSearchParams] = useSearchParams();
+
+searchParams → read values from the URL (like sortBy)
+setSearchParams → update the URL query string
+
+setSearchParams is used to update the URL query string so the URL stays in sync with UI state, enabling persistence, shareability, and browser navigation support.
+```
+
+Why you need setSearchParams
+
+1️⃣ Reading is not enough
+
+searchParams.get("sortBy");
+
+This only reads from the URL.
+
+If the user:
+
+changes sorting
+clicks a filter
+selects pagination
+👉 you must write back to the URL, otherwise:
+
+the URL won’t reflect UI state
+refresh / share link won’t work correctly
+That’s what setSearchParams is for
+
+```JS
+Update the value (THIS is where setSearchParams is used)
+function handleSortChange(value) {
+  setSearchParams({ sortBy: value });
+}
+
+// Now the URL becomes:
+/products?sortBy=rating
+```
+
+```JS
+// Real-world pattern (recommended)
+// Preserve existing query params
+// ⚠️ This is important
+
+function handleSortChange(value) {
+  setSearchParams(prev => {
+    prev.set("sortBy", value);
+    return prev;
+  });
+}
+
+// This:
+// updates sortBy
+// keeps other params (page, filter, etc.)
+```
+
 # React Router
 
 Server-side routing
@@ -1260,10 +1315,17 @@ react-router provide a path atribute --> "\*" , it means that it will show certa
 //ErrorPage <-- we create separate component for error page, if the route is missing in our code then it will show ErrorPage component and it will be displayed to the user
 ```
 
-# Links
+# Link tags VS. anker tags
 
-- when use <a> tags, usually it uses to connect web pages togther, but by default it will upload new page --> which defeats one of the purposes of React and single page applications.
-- Therefore we use <Links> to don't upload entire page. For example using <Links> tags are useful in NavBar component, NavBar component will b outside <Routes> and inside <BrowserRoutes>
+- when use `<a>` tags, usually it uses to connect web pages togther, but by default it will upload new page --> which defeats one of the purposes of React and single page applications.
+- If you need a full page reload (e.g., for external links or to reset the entire application state), use the standard HTML `<a>` tag instead of `<Link>`.
+
+```JS
+<a href="/your-path">Click here</a>
+```
+
+- Therefore we use `<Link>` to don't upload entire page. For example using `<Link>` tags are useful in NavBar component, NavBar component will be outside `<Routes>` and inside `<BrowserRoutes>`
+- `<Link>` component is designed specifically to prevent full page refreshes. It enables client-side routing, which updates the URL and changes the view without fetching a new HTML document from the server, making your app feel faster and more seamless.
 
 ```JS
 <nav>
