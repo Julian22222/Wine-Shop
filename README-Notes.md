@@ -305,8 +305,6 @@ const CounterWithHooks = () => {
 
 - Class components are used more often
 - When we use Class component we don't use hooks. When we write --> extends React.Component we are inherit method setState (useState in Functional components). Using setState for updating the state of the component the same way as useState in Functional components.
-- useState is a Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it.
-- Why is state update sometimes "asynchronous"? React batches state updates to improve performance. If you update the state and immediately console.log it, you might see the old value.
 
 ```JS
 //Class component
@@ -484,6 +482,8 @@ export default Sum;
 - State is a built-in object used to store component data that can change.
 - State is local and mutable; props are external and read-only.
 - useState - is a hook that allows functional components to manage state. When state changes the component re-renders
+- useState is a Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it.
+- Why is state update sometimes "asynchronous"? React batches state updates to improve performance. If you update the state and immediately console.log it, you might see the old value.
 
 ```JS
 import {useState} from 'react';  //<-- import useState from Reacr library to this component to use it in here
