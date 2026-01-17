@@ -4,14 +4,27 @@
 - DOM represents web page to allow programm amend, change document structure, style and content.
 - DOM represents document as nodes and objects. Therefore different programming languages can connect to this web page.
 - The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript.
-- The DOM has a tree structure, tree starts from root node which is document.documentElement (<html>) and then it branches out.
+- The DOM has a tree structure, tree starts from root node which is
+
+```JS
+document.documentElement<html>
+```
+
+and then it branches out.
+The Virtual DOM is a lightweight copy of the real DOM that React uses to improve performance.
+
+- browsers can't read JSX, JSX must be converted to JavaScript using tools like Babel
 
 - DOM relatively slow in refreshing due to tree structure, which is needed recursion.
+- The Virtual DOM is a lightweight copy of the real DOM that React uses to improve performance.
 - React gives opportunity to developers to work with virtual DOM. React creates a lightweight, in-memory representation of the UI.
-- Virtual DOM (VDOM) which is used by React is refreshing much quicker and effective, because he doesn't use recursion to go through all nodes and branches( manually traversing through the parent and child nodes), but it uses Virtual DOM to compare with previous version and updates only those nodes that have been changed.
+- The Virtual DOM (VDOM) is a lightweight, in-memory representation of the real DOM.
+- Virtual DOM (VDOM) which is used by React is refreshing much quicker and effective, because he doesn't use recursion to go through all nodes and branches( manually traversing through the parent and child nodes), but it uses Virtual DOM to compare with previous version of VDOM and updates only those nodes that have been changed.
+- The Virtual DOM is a "copy" of the real DOM kept in memory. When state changes, React creates a new Virtual DOM tree. It compares it to the old one (this is called Diffing).
 
-- React allow us to use syntax mix of JavaScript and HTML which is called JSX (JavaScript extension), JavaScript can be implemented using curly brackets --> {}
+- React allow us to use syntax mix of JavaScript and HTML which is called JSX (JavaScript XML / JavaScript extension), JavaScript can be implemented using curly brackets --> {}
 - React JSX can render strings, numbers, booleans (ignored), arrays, and React elements, but cannot render plain objects directly.
+- Browsers cannot read JSX directly, so tools like Babel transpile it into standard React.createElement() calls.
 
 ```JS
 //Why objects cause an error?
@@ -51,7 +64,6 @@ function App() {
 
 - Also, components create parent-child relationship and show child components -->
   App
-
   - Header
   - Nav
   - Content //<--parent has 2 child
@@ -61,15 +73,15 @@ function App() {
 - onClick = {function} //<-- function that will be invoked after click
 - onMouseEnter = {mouseOver function} //<-- function will be invoked after hover on that field
 
+- lazy loading -> Loading components only when needed.
+
 # Basic React file structure
 
 - public (FOLDER) //<-- The public folder is used to store static files (you can keep here -🖼️ Images (logos, icons), 📄 index.html, 🌐 Favicon (favicon.ico), 📜 Manifest files, 🔊 Audio / video files)
-
   - favicon.ico
   - index.html ////<--MAIN, ROOT FILE, STARTING FILE
 
 - src (FOLDER)
-
   - App.css //<--css file,styles
   - App.js //<-- where you start your DOM tree, first component, all others components are child components
   - index..css
@@ -103,7 +115,7 @@ npx create-react-app my-app-name
 # Most common snippets /The short letters used to quickly create a function component in React.js
 
 ```JS
-1️⃣ rfce
+1️⃣ rfce + Tab
 //Creates a React Function Component with export
 
 import React from 'react'
@@ -118,12 +130,12 @@ export default ComponentName
 ```
 
 ```JS
-2️⃣ rfc
+2️⃣ rfc + Tab
 //Creates a React Function Component (without export)
 ```
 
 ```JS
-3️⃣ rafce
+3️⃣ rafce + Tab
 //Creates a React Arrow Function Component with export
 
 const ComponentName = () => {
@@ -136,13 +148,16 @@ export default ComponentName
 ```
 
 ```JS
-4️⃣ rafc
+4️⃣ rafc + Tab
 //Creates a React Arrow Function Component (without export)
 ```
 
 # Different types of writing React components
 
 ## React components can be either functional or class based.
+
+- Difference between functional and class components? - Functional components are simple JavaScript functions and use hooks (like useState). Class components use ES6 classes and lifecycle methods.
+- Class components: Use ES6 classes and extend React.Component. They use this.state and lifecycle methods like componentDidMount
 
 Developers mostly use functional components, not class-based components.
 
@@ -290,6 +305,8 @@ const CounterWithHooks = () => {
 
 - Class components are used more often
 - When we use Class component we don't use hooks. When we write --> extends React.Component we are inherit method setState (useState in Functional components). Using setState for updating the state of the component the same way as useState in Functional components.
+- useState is a Hook that allows you to add state to a functional component. It returns an array with two values: the current state and a function to update it.
+- Why is state update sometimes "asynchronous"? React batches state updates to improve performance. If you update the state and immediately console.log it, you might see the old value.
 
 ```JS
 //Class component
@@ -406,6 +423,10 @@ class Counter extends React.Component {
 }
 ```
 
+# StrictMode
+
+What is a "Strict Mode" in React? <React.StrictMode> is a tool for highlighting potential problems in an application. It renders components twice in development to help find side-effect bugs.
+
 # Props (shorten name from properties)
 
 - Often we need to pass data between/ through components
@@ -436,8 +457,18 @@ const Sum =(props)=>{
 export default Sum;
 ```
 
+```JS
+//How do you pass a function as a prop?
+//You define a function in the parent and pass it just like a variable:
+
+<Child handleClick={myFunction} />.
+//This allows the child to "talk back" to the parent.
+```
+
 # Hooks
 
+- React Hooks - Functions that let you use state and lifecycle features in functional components.
+- Hooks were introduced to reuse logic and avoid complex class components.
 - All hooks starts with word --> use
 - Our function should be named with the value of state they update --> setName, setCount etc. if we create state for name then we need to call it --> const [name,setName] = useState("")
 
@@ -450,6 +481,9 @@ export default Sum;
 - We use state to track any data that changes i our app
 - React gives us the useState hook, which allow us to change state variable and then React will update our UI amd then render HTML --> new data will appear on our UI (new data will show on webpage)
 - A good rule of thumb to follow --> place your state as low as possible, but as high as necessary. (you need to plan in what component you need to have which state, state must be located in correct component in the tree to pass all necessary data to lower components and not to high in the tree to do not make props drilling - by passing props through all the components down to correct component)
+- State is a built-in object used to store component data that can change.
+- State is local and mutable; props are external and read-only.
+- useState - is a hook that allows functional components to manage state. When state changes the component re-renders
 
 ```JS
 import {useState} from 'react';  //<-- import useState from Reacr library to this component to use it in here
@@ -577,6 +611,7 @@ setTodos((currTodos)=>{
 # Passing state to child components (passing state using props)
 
 - We can pass any data from parent component to the child component through - props
+- props are imutable, and read-only.
 
 ```JS
 import {useState} from "react";
@@ -653,6 +688,135 @@ return(
 
 };
 ```
+
+# Children Props
+
+- It is a special prop (props.children) that allows you to pass components or elements as data to other components, allowing for "Composition".
+- It is a special built-in React prop that represents whatever you put between a component’s opening and closing tags. It contains everything inside component tags. Used for composition, not configuration, Makes components flexible and reusable.
+- children is a special React prop that represents whatever is nested inside a component.
+- children props allow you to create reusable wrapper components without knowing in advance what content they will contain. Common use cases: Layout components (Page, Container), UI wrappers (Card, Modal, Container components), Higher-order UI components
+- children props is very flexible. It can be A string: A number, A React element, Multiple elements (array), null or undefined, Even a function (render props)
+- children props lets you build reusable components that wrap dynamic content.
+- You use children when you want the Modal to be generic, reusable, and flexible instead of hard-coded.
+
+```JS
+//Simple explanation
+
+<MyComponent>
+  Hello World
+</MyComponent>
+
+// Inside MyComponent, "Hello World" is available as:
+// props.children
+
+// Here:
+// props is a parameter
+// React will automatically pass it when rendering the component
+// You do not create props yourself.
+```
+
+```JS
+//Basic example
+
+function Card(props) {
+  return <div className="card">{props.children}</div>;
+}
+
+//Usage:
+//<h2> and <p> are passed as children, Card renders them using props.children
+<Card>
+  <h2>Title</h2>
+  <p>This is content</p>
+</Card>
+
+//Rendered output:
+
+<div class="card">
+  <h2>Title</h2>
+  <p>This is content</p>
+</div>
+```
+
+```JS
+//Destructuring children
+//Common pattern:
+
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+```
+
+```JS
+//Real-world example: Modal component
+//Modal.jsx
+
+function Modal({ isOpen, onClose, children }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="overlay">
+      <div className="modal">
+        <button onClick={onClose}>Close</button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+////////////////////////////////////////
+//Using the Modal in a page
+function App() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
+        <h2>Delete Account</h2>
+        <p>Are you sure you want to delete your account?</p>
+        <button>Confirm</button>
+      </Modal>
+    </>
+  );
+}
+```
+
+What’s happening (real usage explanation)
+
+- Modal doesn’t know what content it will show
+- The content (h2, p, button) is passed as children
+- This makes Modal reusable anywhere in the app
+
+```JS
+//With children (flexible & reusable ✅) - with children props you can pass to Modal different compoents. Make it reusable by passing different content
+
+function Modal({ isOpen, onClose, children }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal">
+      <button onClick={onClose}>✕</button>
+      {children}
+    </div>
+  );
+}
+
+//Usage:
+<Modal isOpen={open} onClose={close}>
+  <h2>Delete Account</h2>
+  <p>Are you sure?</p>
+  <button>Confirm</button>
+</Modal>
+```
+
+Think of Modal like a box 📦
+
+The box stays the same
+You can put anything inside
+Without children, you’d need:
+
+A different box for every item
 
 # Controlled Components (in React)
 
@@ -889,12 +1053,15 @@ return(
 
 # useEffect Data Fetching
 
+- useEffect - A hook for performing side effects like API calls. useEffect run after the component renders
 - When we send a request to api/users with GET method --> to see all users , then it should show all users only once when web page is uploaded.
 
 To do so we use the useEffect hook and it takes 2 arguments:
 
 - effect to run a function (containing the logic of our side-effect)
 - dependencies --> an array of variables. When any variable in the array change value , the effect will run
+- useEffect With []: Runs once after the first render (Mounting).
+- Without []: Runs after every single render.
 
 -->
 
@@ -1350,6 +1517,7 @@ react-router provide a path atribute --> "\*" , it means that it will show certa
 
 # React Context
 
+- useContext - a hook to access global state without prop drilling
 - When we passing data through out the components in React, we hold our values in state and pass them between components using props. When we have big and complicated App , we can use state in few/ many components on various levels of nesting in our component trees. Therefore state is hold on higher levels (in App.js) and then passing down through different components - this is called props drilling.
   -The Context API is designed for state that needs to be shared by multiple components, or for state that can be considered global
 - React offers a solution --> Context API. Context API makes data and state global (accessible everywhere) in our App.
@@ -1735,7 +1903,6 @@ useEffect(() => {
 - API's usually has lots of data, could be more than 1000 elements (books for example)
 - Imagine how big the response would be if you could make a request to get all books from this server
 - There are many different ways that RESTful APIs can do this. A few of the common options are:
-
   - Page numbers ( The client requests a particular "page" of results:)
 
   ```JS
@@ -2009,18 +2176,19 @@ It can be npm packages or browser extensions
 <button area-label="Like"> Heart </button>  //<-- extra label , which here says 'like' ,s the user knows what the button does
 ```
 
-# Custom Hooks
+# React Custom Hooks
 
-A custom hook in React is your own hook — a reusable function that starts with use and uses other React hooks to share logic between components.
-
-A custom hooks - are function, They reuse logic, not UI, They can use other hooks, They make code cleaner and reusable
-
+- Custom Hooks are one of the most powerful ideas in modern React.
+  They let you extract reusable logic from components and share it cleanly.
+- A custom hook in React is your own hook — a reusable function that starts with use and uses other React hooks to share logic between components.
+- Custom Hook is a custom hook is simply a JavaScript function that: Uses React hooks (useState, useEffect, etc.), Starts with the word use, Encapsulates reusable logic. And It does NOT return JSX as React component.
+- custom hook it is reusable functions that use hooks
+- A custom hooks - are function, They reuse logic, not UI, They can use other hooks, They make code cleaner and reusable
 - In React we have been using some in built hooks to add functionality to our components. React also supports writing our own custom hooks to extract component logic into re-useable functions.
-
 - Custom hook is a function, whose name starts with "use" and can call other hooks within itself.
 - When we are calling hooks from within our components we must follow the rules of hooks and we must do the same with our custom hooks.
-
 - Custom hooks work exactly like components, the major difference being that they are not responsible for rendering data. Where our components will usually return some JSX (or potentially null) our custom hooks can return data in any form we would like.
+- Custom Hooks Exist to Reuse logic, Making components cleaner, Improving readability & testability
 
 ```JS
                   Custom hook vs component
@@ -2103,6 +2271,300 @@ function Users() {
 }
 ```
 
+```JS
+//🧱 Basic Custom Hook Example
+//useCounter.js
+import { useState } from "react";
+
+function useCounter(initialValue = 0) {   //<- custom React hook called useCounter
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => setCount(c => c + 1);   //<- this hook has a increment function
+  const decrement = () => setCount(c => c - 1);   //<- this hook has a decrement function
+  const reset = () => setCount(initialValue);    //<-- this hook has a reset function
+
+  return { count, increment, decrement, reset };
+}
+
+export default useCounter;
+
+///////////////////////////////////////////////////////////////////
+//Import useState
+//Create the custom hook
+
+function useCounter(initialValue = 0) {
+
+//This defines a function named useCounter
+//initialValue = 0 means:
+//If you don’t give a starting number, it starts at 0
+//Example:
+useCounter()     // starts at 0
+useCounter(10)   // starts at 10
+
+
+// Create state for the counter
+const [count, setCount] = useState(initialValue);
+
+//count → the current number
+//setCount → function to change the number
+//React remembers count between renders
+
+//Increase the counter
+const increment = () => setCount(c => c + 1);
+
+//This increases the number by 1
+//c is the current value
+//Using c => c + 1 is safe and always correct
+//In simple words:
+//“Take the current number and add 1”
+
+
+//Decrease the counter
+const decrement = () => setCount(c => c - 1);
+
+//This decreases the number by 1
+//In simple words:
+//“Take the current number and subtract 1”
+
+
+//Reset the counter
+const reset = () => setCount(initialValue);
+//This sets the number back to the starting value
+//Example:
+useCounter(5) → reset() → count becomes 5
+
+
+//Return everything
+return { count, increment, decrement, reset };
+//This gives other components access to:
+//the number (count)
+//the functions to change it
+
+////////////////////////////////////////////////////////////////////
+//Usage
+
+function Counter() {
+  const { count, increment, decrement } = useCounter(10);  //<-- use custom hook, destructuring functions from it
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </>
+  );
+}
+```
+
+```JS
+//📦 Custom Hook for API Calls (Very Common)
+//useFetch.js
+
+import { useState, useEffect } from "react";
+
+function useFetch(url) {   //<-- create custom hook - useFetch
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (isMounted) {
+          setData(data);
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        if (isMounted) {
+          setError(err);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [url]);
+
+  return { data, loading, error };  //returning states from custom hook
+}
+
+export default useFetch;
+
+//then you can import this hook to your component
+```
+
+# React Fragment
+
+- React fragments (<></> or <React.Fragment></React.Fragment>) are super useful.
+- React components must return a single parent element. If you don't want to add extra <div> nodes to the DOM (which can mess up CSS styling or accessibility), you use Fragments to group children.
+- This can mess with CSS styling or layout (especially with flex/grid).
+
+```JS
+function MyComponent() {
+
+  return (
+    <>
+      <h1>Hello</h1>
+      <p>Welcome to my app</p>
+    </>
+  );
+}
+```
+
+# React.js + Bootstrap
+
+- Install Bootstrap via npm (best for React) in your React project root.
+
+```JS
+npm install bootstrap
+```
+
+- Import Bootstrap CSS in your project. Open src/index.js or src/main.jsx (depending on your setup) and add:
+
+```JS
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+
+bootstrap minified version - for Production:
+
+- ✅ Loads faster
+- ✅ Smaller bundle size
+- ✅ Better performance
+- ✅ Standard for production apps
+
+Non-minified: for -> Learning , debugging, development
+
+```JS
+bootstrap/dist/js/bootstrap.bundle.js
+```
+
+This version:
+
+- ✅Is readable
+- ✅Has comments
+- ✅Is easier to debug
+
+```JS
+(Optional) Import Bootstrap JS (for modals, dropdowns, tooltips)
+If you need Bootstrap’s JavaScript features:
+npm install @popperjs/core
+Then in index.js or main.jsx:
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+```
+
+⚠️ Remember: use className, not class.
+
+```JS
+//Alternative: Use CDN (quick but not ideal)
+//Good for small demos, not recommended for production.
+//Add this to public/index.html:
+
+<link
+  href=https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css
+  rel="stylesheet"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+```
+
+# useMemo hook
+
+- useMemo remembers the result of a calculation and only recalculates it when its dependencies change.
+- usually is used for some calculations - sorting and filtering, It is fast and No fetch
+- Works similara to useEffect - render the page when state are changing in dependency array.
+  Is used in Home.jsx compoent - line 53
+- the page does re-render when state are changing in dependency array, but it does NOT refetch, and only the necessary work runs
+- useMemo hook cause page re-renders when sorting or filtering changes (states in useMemo -> in dependency array)
+
+# useRef
+
+- useRef is a Hook that lets you persist a mutable value across renders without causing a re-render, and it’s commonly used to reference DOM elements.
+- useRef creates a mutable object whose .current value persists between renders without triggering a re-render when it changes.
+- useRef is a React Hook that provides a persistent, mutable reference that survives re-renders and can be used to access DOM elements or store values without triggering a re-render.
+
+```JS
+//Basic syntax
+const ref = useRef(initialValue);
+
+//Returns an object: { current: initialValue }
+//Updating ref.current does not re-render the component
+```
+
+```JS
+//Common use cases
+//1️⃣ Accessing DOM elements (most common)
+import { useRef } from "react";
+
+function InputFocus() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focusInput}>Focus</button>
+    </>
+  );
+}
+
+//👉 Here, useRef lets you directly interact with the DOM.
+```
+
+```JS
+//2️⃣ Storing a value that doesn’t trigger re-renders
+function Timer() {
+  const countRef = useRef(0);
+
+  const increment = () => {
+    countRef.current += 1;
+    console.log(countRef.current);
+  };
+
+  return <button onClick={increment}>Increment</button>;
+}
+
+// Value persists across renders
+// UI doesn’t update when it changes
+```
+
+```JS
+//3️⃣ Keeping previous values
+function Example({ value }) {
+  const prevValue = useRef(value);
+
+  useEffect(() => {
+    prevValue.current = value;
+  }, [value]);
+
+  return <p>Previous: {prevValue.current}</p>;
+}
+```
+
+```JS
+                              useRef vs useState
+
+Feature                    useRef    |   useState
+
+Triggers re-render         ❌ No     |  ✅ Yes
+Mutable                    ✅ Yes    |  ❌ No
+Persists across renders    ✅ Yes    |  ✅ Yes
+Use for UI updates         ❌ No     |  ✅ Yes
+```
+
+Important rules
+
+    useRef value is stable between renders
+    Changes to .current do not cause re-renders
+    Can be used in function components only
+
 # Old code
 
 ```JS
@@ -2164,5 +2626,9 @@ allComments.map(({ user, region, comments }, index) => (
     {region}
     {comments}
   }
+
+```
+
+```
 
 ```
