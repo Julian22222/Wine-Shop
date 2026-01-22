@@ -1,4 +1,4 @@
-# REACT BASIC INFO
+# 🔥 REACT BASIC INFO
 
 - DOM (the Document Object Model)- it is a programming interface for HTML and XML documents
 - DOM represents web page to allow programm amend, change document structure, style and content.
@@ -75,7 +75,7 @@ function App() {
 
 - lazy loading -> Loading components only when needed.
 
-# Basic React file structure
+# 🗂️ Basic React file structure
 
 - public (FOLDER) //<-- The public folder is used to store static files (you can keep here -🖼️ Images (logos, icons), 📄 index.html, 🌐 Favicon (favicon.ico), 📜 Manifest files, 🔊 Audio / video files)
   - favicon.ico
@@ -98,7 +98,7 @@ function App() {
 
 .....................................................................................................
 
-# Creating new REACT apps
+# ➕ Creating new REACT apps
 
 ```JS
 //in terminal we put
@@ -112,7 +112,7 @@ npx create-react-app my-app-name
 - Before you start creating your app you need to think about app design and component location
   Tools: - Excalidraw - Figma - Miro
 
-# Most common snippets /The short letters used to quickly create a function component in React.js
+# 📦 Most common snippets /The short letters used to quickly create a function component in React.js
 
 ```JS
 1️⃣ rfce + Tab
@@ -152,7 +152,7 @@ export default ComponentName
 //Creates a React Arrow Function Component (without export)
 ```
 
-# Different types of writing React components
+# ⛓️‍💥 Different types of writing React components
 
 ## React components can be either functional or class based.
 
@@ -421,11 +421,69 @@ class Counter extends React.Component {
 }
 ```
 
-# StrictMode
+# ⚠️ StrictMode
 
 What is a "Strict Mode" in React? <React.StrictMode> is a tool for highlighting potential problems in an application. It renders components twice in development to help find side-effect bugs.
 
-# Props (shorten name from properties)
+# 🛣️ React Router
+
+Server-side routing
+
+- The server has view for every single route of our app.
+- user navigates to /about , the browser sends a GET request to /about and our server responds wih corresponding view.
+
+Client-side routing
+
+- In React app, the server provides a single HTML file and a bundle of JavaScript. The rendering of the applicatiohappens on client-side.
+- Because all the views of our application are already in the browser, we don't need to make GET request to get different views.
+- We can use a route, a librarythat catches the changes in the URL and renders different components accordingly.
+- HTTP requests still happen in the background, but not for displaying vievs, just for getting or sending data to servers.
+
+# 🛣️ USING REACT ROUTER
+
+- it will give navigation illusion , it will track all changes in URL and renders corresponding component
+
+```JS
+npm i react-router-dom
+```
+
+Example
+
+```JS
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
+const App=()=>{
+
+return(
+    <BrowserRouter>      //<-- BrowserRouter must be wrapped around ll our entire app
+        <div className="App">
+            <h1>My App</h1>
+
+            {/* Everithyng outside of <Routes> -->  <h1>My App</h1>  will be rendered(show) on each page, most often Navbar is used here */}
+
+            <Routes>               //<--Routes component takes a number of Route components as children
+                {/*   <Route path="/topics" element={<Topics /> } />  <-- if in URL will be /topics path then react will render component with tha name Topics*/}
+                <Route path="/" element={<Home /> } />            ///<-- these are all available Routes in our App, Route takes a props of path
+                <Route path="/topics" element={<Topics /> } />    ///<-- these are all available Routes in our App, Route takes a props of path
+                <Route path="/about" element={<About /> } />      ///<-- these are all available Routes in our App, Route takes a props of path
+            </Routes>
+        </div>
+    </BrowserRouter>
+);
+};
+```
+
+# 🛣️ React Default Routes (if user uses any URl that not existing in our app -> it will show some page that we will create)
+
+react-router provide a path atribute --> "\*" , it means that it will show certain page if user uses any page that is not assigned or not existing
+
+```JS
+<Route path="*" element={ErrorPage} />
+
+//ErrorPage <-- we create separate component for error page, if the route is missing in our code then it will show ErrorPage component and it will be displayed to the user
+```
+
+# 🚸 Props (shorten name from properties)
 
 - Often we need to pass data between/ through components
 - Props are key-value pairs
@@ -463,7 +521,217 @@ export default Sum;
 //This allows the child to "talk back" to the parent.
 ```
 
-# Hooks
+# 🚸 Passing state to child components (passing state using props)
+
+- We can pass any data from parent component to the child component through - props
+- props are imutable, and read-only.
+
+```JS
+import {useState} from "react";
+
+const App=()=>{
+const [todos, setTodos] = useState(["code1","code2","code3"]);
+
+const clearTodos =()=>{
+    setTods([]);
+};
+
+return(
+    <div>
+        <Header />
+        <button onClick={()=>clearTodos()} > Clear All Todos </button>
+
+        <TodoList todos ={todos} />  //<--passing todos ={todos} to TodoList child component as props
+
+    </div>
+)
+};
+
+
+//Header Component
+const Header= ()=>{
+return <h1> My todo List </h1>
+};
+
+
+//TodoList Component
+const TodoList =(props)=>{  //<-- we receive the props here todos, that we passed
+    return(
+        <ul>
+            {props.todos.map((todo)=>{
+                return <li key={todo}> {todo} </li>
+            })}
+        </ul>
+    );
+};
+```
+
+- Example
+
+```JS
+const Todos =()=>{
+
+const [todos,setTodos] =useState([
+{id:1,text: 'eat'},
+{id:2, text: "sleep"},
+{id:3, text: "react"},
+{id:4, text: "sleep"},
+{id:5, text: "react"}
+]);
+
+let reactCount = 0;
+
+todos.forEach((todo)=>{  //<--count how many react words we have in our todos
+if(todo.text === "react"){
+    reactCount++;
+}
+});
+
+return(
+    <div>
+        <h1>My todo List</h1>
+        <p>How many react words I have to do: {reactCount} </p>
+        <ul>
+            {todos.map({id, text})=>{
+                <li key={id}> {text} </li>
+            }}
+        </ul>
+    </div>
+);
+
+};
+```
+
+# 🚸 Children Props
+
+- It is a special prop (props.children) that allows you to pass components or elements as data to other components, allowing for "Composition".
+- It is a special built-in React prop that represents whatever you put between a component’s opening and closing tags. It contains everything inside component tags. Used for composition, not configuration, Makes components flexible and reusable.
+- children is a special React prop that represents whatever is nested inside a component.
+- children props allow you to create reusable wrapper components without knowing in advance what content they will contain. Common use cases: Layout components (Page, Container), UI wrappers (Card, Modal, Container components), Higher-order UI components
+- children props is very flexible. It can be A string: A number, A React element, Multiple elements (array), null or undefined, Even a function (render props)
+- children props lets you build reusable components that wrap dynamic content.
+- You use children when you want the Modal to be generic, reusable, and flexible instead of hard-coded.
+
+```JS
+//Simple explanation
+
+<MyComponent>
+  Hello World
+</MyComponent>
+
+// Inside MyComponent, "Hello World" is available as:
+// props.children
+
+// Here:
+// props is a parameter
+// React will automatically pass it when rendering the component
+// You do not create props yourself.
+```
+
+```JS
+//Basic example
+
+function Card(props) {
+  return <div className="card">{props.children}</div>;
+}
+
+//Usage:
+//<h2> and <p> are passed as children, Card renders them using props.children
+<Card>
+  <h2>Title</h2>
+  <p>This is content</p>
+</Card>
+
+//Rendered output:
+
+<div class="card">
+  <h2>Title</h2>
+  <p>This is content</p>
+</div>
+```
+
+```JS
+//Destructuring children
+//Common pattern:
+
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+```
+
+```JS
+//Real-world example: Modal component
+//Modal.jsx
+
+function Modal({ isOpen, onClose, children }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="overlay">
+      <div className="modal">
+        <button onClick={onClose}>Close</button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+////////////////////////////////////////
+//Using the Modal in a page
+function App() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
+        <h2>Delete Account</h2>
+        <p>Are you sure you want to delete your account?</p>
+        <button>Confirm</button>
+      </Modal>
+    </>
+  );
+}
+```
+
+What’s happening (real usage explanation)
+
+- Modal doesn’t know what content it will show
+- The content (h2, p, button) is passed as children
+- This makes Modal reusable anywhere in the app
+
+```JS
+//With children (flexible & reusable ✅) - with children props you can pass to Modal different compoents. Make it reusable by passing different content
+
+function Modal({ isOpen, onClose, children }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal">
+      <button onClick={onClose}>✕</button>
+      {children}
+    </div>
+  );
+}
+
+//Usage:
+<Modal isOpen={open} onClose={close}>
+  <h2>Delete Account</h2>
+  <p>Are you sure?</p>
+  <button>Confirm</button>
+</Modal>
+```
+
+Think of Modal like a box 📦
+
+The box stays the same
+You can put anything inside
+Without children, you’d need:
+
+A different box for every item
+
+# 🪝 Hooks (useState, useEffect, useParams, useSearchPramas, useNavigate, etc.)
 
 - React Hooks - Functions that let you use state and lifecycle features in functional components.
 - Hooks were introduced to reuse logic and avoid complex class components.
@@ -473,7 +741,7 @@ export default Sum;
 - Only call Hooks at the top level of the component (declare all Hooks on the top)
 - Only call Hooks from React function (Hook must be inside the function of the React component )
 
-# React State --> useState
+# 🪝 useState - React State
 
 - To make our apps dynamic they must keep track of some information that cnahges. This concept reffered to as state.
 - We use state to track any data that changes i our app
@@ -608,450 +876,7 @@ setTodos((currTodos)=>{
     })
 ```
 
-# Passing state to child components (passing state using props)
-
-- We can pass any data from parent component to the child component through - props
-- props are imutable, and read-only.
-
-```JS
-import {useState} from "react";
-
-const App=()=>{
-const [todos, setTodos] = useState(["code1","code2","code3"]);
-
-const clearTodos =()=>{
-    setTods([]);
-};
-
-return(
-    <div>
-        <Header />
-        <button onClick={()=>clearTodos()} > Clear All Todos </button>
-
-        <TodoList todos ={todos} />  //<--passing todos ={todos} to TodoList child component as props
-
-    </div>
-)
-};
-
-
-//Header Component
-const Header= ()=>{
-return <h1> My todo List </h1>
-};
-
-
-//TodoList Component
-const TodoList =(props)=>{  //<-- we receive the props here todos, that we passed
-    return(
-        <ul>
-            {props.todos.map((todo)=>{
-                return <li key={todo}> {todo} </li>
-            })}
-        </ul>
-    );
-};
-```
-
-- Example
-
-```JS
-const Todos =()=>{
-
-const [todos,setTodos] =useState([
-{id:1,text: 'eat'},
-{id:2, text: "sleep"},
-{id:3, text: "react"},
-{id:4, text: "sleep"},
-{id:5, text: "react"}
-]);
-
-let reactCount = 0;
-
-todos.forEach((todo)=>{  //<--count how many react words we have in our todos
-if(todo.text === "react"){
-    reactCount++;
-}
-});
-
-return(
-    <div>
-        <h1>My todo List</h1>
-        <p>How many react words I have to do: {reactCount} </p>
-        <ul>
-            {todos.map({id, text})=>{
-                <li key={id}> {text} </li>
-            }}
-        </ul>
-    </div>
-);
-
-};
-```
-
-# Children Props
-
-- It is a special prop (props.children) that allows you to pass components or elements as data to other components, allowing for "Composition".
-- It is a special built-in React prop that represents whatever you put between a component’s opening and closing tags. It contains everything inside component tags. Used for composition, not configuration, Makes components flexible and reusable.
-- children is a special React prop that represents whatever is nested inside a component.
-- children props allow you to create reusable wrapper components without knowing in advance what content they will contain. Common use cases: Layout components (Page, Container), UI wrappers (Card, Modal, Container components), Higher-order UI components
-- children props is very flexible. It can be A string: A number, A React element, Multiple elements (array), null or undefined, Even a function (render props)
-- children props lets you build reusable components that wrap dynamic content.
-- You use children when you want the Modal to be generic, reusable, and flexible instead of hard-coded.
-
-```JS
-//Simple explanation
-
-<MyComponent>
-  Hello World
-</MyComponent>
-
-// Inside MyComponent, "Hello World" is available as:
-// props.children
-
-// Here:
-// props is a parameter
-// React will automatically pass it when rendering the component
-// You do not create props yourself.
-```
-
-```JS
-//Basic example
-
-function Card(props) {
-  return <div className="card">{props.children}</div>;
-}
-
-//Usage:
-//<h2> and <p> are passed as children, Card renders them using props.children
-<Card>
-  <h2>Title</h2>
-  <p>This is content</p>
-</Card>
-
-//Rendered output:
-
-<div class="card">
-  <h2>Title</h2>
-  <p>This is content</p>
-</div>
-```
-
-```JS
-//Destructuring children
-//Common pattern:
-
-function Card({ children }) {
-  return <div className="card">{children}</div>;
-}
-```
-
-```JS
-//Real-world example: Modal component
-//Modal.jsx
-
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null;
-
-  return (
-    <div className="overlay">
-      <div className="modal">
-        <button onClick={onClose}>Close</button>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-////////////////////////////////////////
-//Using the Modal in a page
-function App() {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <>
-      <button onClick={() => setOpen(true)}>Open Modal</button>
-
-      <Modal isOpen={open} onClose={() => setOpen(false)}>
-        <h2>Delete Account</h2>
-        <p>Are you sure you want to delete your account?</p>
-        <button>Confirm</button>
-      </Modal>
-    </>
-  );
-}
-```
-
-What’s happening (real usage explanation)
-
-- Modal doesn’t know what content it will show
-- The content (h2, p, button) is passed as children
-- This makes Modal reusable anywhere in the app
-
-```JS
-//With children (flexible & reusable ✅) - with children props you can pass to Modal different compoents. Make it reusable by passing different content
-
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal">
-      <button onClick={onClose}>✕</button>
-      {children}
-    </div>
-  );
-}
-
-//Usage:
-<Modal isOpen={open} onClose={close}>
-  <h2>Delete Account</h2>
-  <p>Are you sure?</p>
-  <button>Confirm</button>
-</Modal>
-```
-
-Think of Modal like a box 📦
-
-The box stays the same
-You can put anything inside
-Without children, you’d need:
-
-A different box for every item
-
-# Controlled Components (in React)
-
-### This example showing uncontrolled component
-
-```JS
-const App =()=>{
-
-const [list,setList] = useState(["Bread","Strawberries","Chocolate"]);
-
-return(
-<div>
-    <ItemAdder setList={setList} />  //<--passindprops to child components
-    <ShoppingList items= {list} />
-</div>
-);
-};
-
-
-const ShoppingList =(props)=>{
-return(
-    <ul>
-        {prop.items.map((item)=>{
-            return (
-                <li key={item}>
-                    <p>{item}</p>
-                </li>
-            );
-        })}
-    </ul>
-);
-};
-
-
-const ItemAdder=()=>{
-return(
-<div>
-    <form>
-        <label> Add new Item:
-        <input />  //<-- this input allow to put some data,but it is inserting data to React, to read the data we need to return to DOM, this is called uncontrolled component
-        </label>
-        <button type="submit"> Addd item </button>
-    </form>
-</div>
-);
-};
-```
-
-### This example showing controlled component
-
-A component is controlled if:
-
-- its value is set with a prop.
-- changes to that value are handled by React
-
-```JS
-const ItemAdder =()=>{
-
-const [newItem, setNewItem] = useState("");
-
-return(
-    <form>
-        <label>
-            Add a new item:
-
-            //Each controlled component must have --> value={...} and onChange={....}, if any of this block will be missing then we can't change the useState or it will have constant values
-            //value={newItem} <--input data will be available in newItem, everything that will be typed in the input will be available in newItem
-            //onChange={(event)=>setNewItem(event.target.value)}  <--onChange event is trigered every time when input value is changed
-
-            <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />  //<--everything user write in this input will be inserting to newItem useState
-        </label>
-        <button type="submit" > Add item </button>
-    </form>
-);
-};
-```
-
-#### Multiple elements in Controlled Component
-
-- Example 1
-
-```JS
-const [formData, setFormData] useState({
-name: "",
-lastname: "",
-email: "",
-phone: ""
-});
-
-const onChange=(e)=>{
-    setFormData((prev)=>{                  //<--will write new data using setFormData
-        let prevData = {...prev};          //<-- creating a copy of previous value from formData using spread operator and adding this value to prevData variable
-        prevData[`${e.target.id}`] = e.target.value;     //<--asign new value , key = value
-
-        return prevData;
-    });
-};
-
-
-<input type="text" value={formData.name}     //<-- all inserted text will go to formData.name in useState
-onChange={onChange}                          //<--we invoke onChange function on any text change in the input
-id="name"                                    //<-- id must be the same as in formData useState object
-placeholder="name" />
-
-<input type="text" value={formData.lastname} onChange={onChange} id="lastname" placeholder="lastname" />
-<input type="email" value={formData.email} onChange={onChange} id="email" placeholder="email" />
-<input type="phone" value={formData.phone} onChange={onChange} id="phone" placeholder="phone" />
-
-```
-
-- Example 2
-
-```JS
-const [data,setData] = useState({
-userEmail: "",
-title: "",
-progress: ""
-});
-
-const handleChange =(e)=>{
-
-const {name, value} = e.target;    //<--destructuring name and value from e.target
-setData(data=>(
-    ...data, [name] : value      //<--creating a copy of previous value from data using spread operator and adding new key value pair to the data useState
-));
-};
-
-<input type="email" required name="userEmail" value={data.userEmail} onChange={handleChange} />
-<input type="text" required maxLength={30} name="title" value={data.title} onChange={handleChange} />
-<input type="range" min="0" max="100" required name="progress" value={data.progress} onChange={handleChange} />
-```
-
-# Event Handlers
-
-in React.js, onClick, onSubmit, and onChange are event handler props (often called event handlers for short).
-
-- it is a function that triggers in response to user actions (onClick, onChange, onSubmit, etc)
-- uses camelCase
-
-```JS
-const headleChange =()=>{
-  console.log("Button clicked");
-}
-
-//Can invoke the function using these examples:
-<input type="text" onChange={headleChange} />
-//OR
-<input type="text" onChange={()=>headleChange() } />
-```
-
-```JS
-//Option 1 (✅ Recommended)
-<input type="text" onChange={headleChange} />
-
-// Why this is better:
-
-// React automatically passes the event object to headleChange
-// No unnecessary function creation on each render
-// Cleaner and idiomatic React
-
-
-function headleChange(e) {
-  console.log(e.target.value);
-}
-
-// ✔ Best practice
-// ✔ Better performance
-// ✔ Access to the event
-```
-
-```JS
-// Option 2 (⚠ Works, but usually not needed)
-
-// What’s different:
-
-// You are creating a new function on every render
-// The event object is NOT passed unless you do it explicitly
-// Usually unnecessary unless you need extra logic or parameters
-// If you want the event here, you must write:
-
-
-
-<input type="text" onChange={(e) => headleChange(e)} />
-
-<input
-  type="text"
-  onChange={(e) => headleChange(e, "username")} />
-```
-
-# Forms
-
-```JS
-const ItemAdder =({setList})=>{
-
-const [newItem, setNewitem] = useState("");
-
-const handleSubmit =(event) =>{
-
-    event.preventDefault();    //<--prevent the form default behavious, won't refresh the web page and won't go to another web page, by invoking this function
-
-
-    setList((currList)=>{             ///<-- add new item to our list in App
-        return [newitem, ...currList];
-    });
-
-    setNewItem("");            //<-- reset the input to be empty, input conteiner will become empty after submitting data
-};
-
-
-return(
-<form onSubmit={hadleSubmit}>  //<--after pressing submit button, the form will be sent --> this will invoke the  hadleSubmit function
-
-    <label>
-        Add a new Item:
-        <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />
-    </lable>
-    <button type="submit"> Add item </button>         //<--submit button
-</form>
-);
-};
-```
-
-### ⭐ Most Common used EVENT HADLERS
-
-- onClick
-- onChange
-- onSubmit
-- onFocus
-- onBlur
-- onKeyDown
-- onMouseEnter / onMouseLeave
-- onScroll
-- and many others
-
-# useEffect Data Fetching
+# 🪝 useEffect - Data Fetching (control of page rendering)
 
 - useEffect - A hook for performing side effects like API calls. useEffect run after the component renders
 - When we send a request to api/users with GET method --> to see all users , then it should show all users only once when web page is uploaded.
@@ -1099,12 +924,40 @@ return(
     ))}
 </ul>
 );
-
 };
-
 ```
 
-### useEffect dependencies
+### Data fetching
+
+- Fetch API is based on promise (asynchronisity)
+- To make requests in React we need to use - http client, axious (npm package), etc
+- By default request will be with GET method
+
+1.
+
+```JS
+//request with GET method
+fetch('http://itunes.apple.com/search?term=beyonce').then((res)=>{res.json()}.then((data)=>{console.log(data)}));
+```
+
+2.
+
+```JS
+//request with POST method , we pass request and method, headers,body as a second option argument to fetch.
+
+fetch('http://www.example.com/api/people',{
+method: 'POST',
+headers: {
+    'Content-Type': 'application/json',
+},
+body: JSON.stringify({name:'Paul'}),
+}).then((res)=>{res.json()}).then((data)=>{console.log(data)})
+.catch((err)=>{
+    console.log(err);
+});
+```
+
+### 🪝 useEffect dependencies
 
 - when we don't put square brackets at all --> Infinite loop (constattly fetching and updating the page, by running this useEffect)
 
@@ -1142,42 +995,12 @@ return(
         <h2>{user.username}</h2>   ///<--render the users profile
     </section>
 );
-
 );
-
 ```
 
-# Data Fetching with Fetch, and how to use --> useParams
-
-- Fetch API is based on promise (asynchronisity)
-- To make requests in React we need to use - http client, axious (npm package), etc
-- By default request will be with GET method
+# 🪝 useParams - get the parameters from URL
 
 1.
-
-```JS
-//request with GET method
-fetch('http://itunes.apple.com/search?term=beyonce').then((res)=>{res.json()}.then((data)=>{console.log(data)}));
-```
-
-2.
-
-```JS
-//request with POST method , we pass request and method, headers,body as a second option argument to fetch.
-
-fetch('http://www.example.com/api/people',{
-method: 'POST',
-headers: {
-    'Content-Type': 'application/json',
-},
-body: JSON.stringify({name:'Paul'}),
-}).then((res)=>{res.json()}).then((data)=>{console.log(data)})
-.catch((err)=>{
-    console.log(err);
-});
-```
-
-3.
 
 ```JS
 import { useParams, Link } from "react-router-dom";
@@ -1225,7 +1048,7 @@ const SingleCard = () => {
 export default SingleCard;
 ```
 
-4.  Also, we can use 2 useParams
+2.  Also, we can use 2 useParams
 
 ```JS
     <BrowserRouter>      //<-- BrowserRouter must be wrapped around ll our entire app
@@ -1259,7 +1082,7 @@ const SingleCard=()=>{
 
 ```
 
-5.
+3.
 
 ```JS
 //request with DELETE method , we pass request and method, headers,body as a second option argument to fetch.
@@ -1283,7 +1106,7 @@ headers: {
 
 ```
 
-# Queries - useSearchParams
+# 🪝 useSearchParams - to handle Queries (get the query parametrs from URL )
 
 - it uses for reading and changing URL queries
 - Another feature is to add queries to the end of our endpoints to provide additional functionality.
@@ -1424,65 +1247,281 @@ function handleSortChange(value) {
 // keeps other params (page, filter, etc.)
 ```
 
-# React Router
+# 🪝 useNavigate - Navigating Programmatically
 
-Server-side routing
+- react-router-dom in React Router will provide access to useNavigate hook, which allow navigate programatically , for example after form is submitted.
 
-- The server has view for every single route of our app.
-- user navigates to /about , the browser sends a GET request to /about and our server responds wih corresponding view.
+The navigate function has 2 different argument types:
 
-Client-side routing
+- A string, which represent the "to" value (the same as with <Link to="/path" >)
+- A number, which represents how many steps forward (positive number) or backwards (negative number) you'd like to go in the browser's history (e.g navigate(-1 is the same as clicking the back button))
 
-- In React app, the server provides a single HTML file and a bundle of JavaScript. The rendering of the applicatiohappens on client-side.
-- Because all the views of our application are already in the browser, we don't need to make GET request to get different views.
-- We can use a route, a librarythat catches the changes in the URL and renders different components accordingly.
-- HTTP requests still happen in the background, but not for displaying vievs, just for getting or sending data to servers.
-
-# USING REACT ROUTER
-
-- it will give navigation illusion , it will track all changes in URL and renders corresponding component
-
-```JS
-npm i react-router-dom
-```
+THIS IS NOT A REPLACEMENT FOR <Link> components!!!
 
 Example
 
 ```JS
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-const App=()=>{
+function MyComponent(){
+    const navigate = useNavigate();
+
+    function handleSubmit(e){
+        e.preventDefault();
+        doSomething()
+        .then(()=>{
+            navigate('/somewhere/else');
+        })
+        .catch((err)=>{
+            console.log(err);
+            //handle error
+        });
+    };
+
+
+    return(
+        <form onSubmit={handleSubmit} >
+            <label> Some msg </label>
+            <input />
+        </form>
+    );
+};
+```
+
+# Controlled Components (in React)
+
+### This example showing uncontrolled component
+
+```JS
+const App =()=>{
+
+const [list,setList] = useState(["Bread","Strawberries","Chocolate"]);
 
 return(
-    <BrowserRouter>      //<-- BrowserRouter must be wrapped around ll our entire app
-        <div className="App">
-            <h1>My App</h1>
+<div>
+    <ItemAdder setList={setList} />  //<--passindprops to child components
+    <ShoppingList items= {list} />
+</div>
+);
+};
 
-            {/* Everithyng outside of <Routes> -->  <h1>My App</h1>  will be rendered(show) on each page, most often Navbar is used here */}
 
-            <Routes>               //<--Routes component takes a number of Route components as children
-                {/*   <Route path="/topics" element={<Topics /> } />  <-- if in URL will be /topics path then react will render component with tha name Topics*/}
-                <Route path="/" element={<Home /> } />            ///<-- these are all available Routes in our App, Route takes a props of path
-                <Route path="/topics" element={<Topics /> } />    ///<-- these are all available Routes in our App, Route takes a props of path
-                <Route path="/about" element={<About /> } />      ///<-- these are all available Routes in our App, Route takes a props of path
-            </Routes>
-        </div>
-    </BrowserRouter>
+const ShoppingList =(props)=>{
+return(
+    <ul>
+        {prop.items.map((item)=>{
+            return (
+                <li key={item}>
+                    <p>{item}</p>
+                </li>
+            );
+        })}
+    </ul>
+);
+};
+
+
+const ItemAdder=()=>{
+return(
+<div>
+    <form>
+        <label> Add new Item:
+        <input />  //<-- this input allow to put some data,but it is inserting data to React, to read the data we need to return to DOM, this is called uncontrolled component
+        </label>
+        <button type="submit"> Addd item </button>
+    </form>
+</div>
 );
 };
 ```
 
-# React Default Routes (if user uses any URl that not existing in our app -> it will show some page that we will create)
+### This example showing controlled component
 
-react-router provide a path atribute --> "\*" , it means that it will show certain page if user uses any page that is not assigned or not existing
+A component is controlled if:
+
+- its value is set with a prop.
+- changes to that value are handled by React
 
 ```JS
-<Route path="*" element={ErrorPage} />
+const ItemAdder =()=>{
 
-//ErrorPage <-- we create separate component for error page, if the route is missing in our code then it will show ErrorPage component and it will be displayed to the user
+const [newItem, setNewItem] = useState("");
+
+return(
+    <form>
+        <label>
+            Add a new item:
+
+            //Each controlled component must have --> value={...} and onChange={....}, if any of this block will be missing then we can't change the useState or it will have constant values
+            //value={newItem} <--input data will be available in newItem, everything that will be typed in the input will be available in newItem
+            //onChange={(event)=>setNewItem(event.target.value)}  <--onChange event is trigered every time when input value is changed
+
+            <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />  //<--everything user write in this input will be inserting to newItem useState
+        </label>
+        <button type="submit" > Add item </button>
+    </form>
+);
+};
 ```
 
-# Link tags VS. anker tags
+#### Multiple elements in Controlled Component
+
+- Example 1
+
+```JS
+const [formData, setFormData] useState({
+name: "",
+lastname: "",
+email: "",
+phone: ""
+});
+
+const onChange=(e)=>{
+    setFormData((prev)=>{                  //<--will write new data using setFormData
+        let prevData = {...prev};          //<-- creating a copy of previous value from formData using spread operator and adding this value to prevData variable
+        prevData[`${e.target.id}`] = e.target.value;     //<--asign new value , key = value
+
+        return prevData;
+    });
+};
+
+
+<input type="text" value={formData.name}     //<-- all inserted text will go to formData.name in useState
+onChange={onChange}                          //<--we invoke onChange function on any text change in the input
+id="name"                                    //<-- id must be the same as in formData useState object
+placeholder="name" />
+
+<input type="text" value={formData.lastname} onChange={onChange} id="lastname" placeholder="lastname" />
+<input type="email" value={formData.email} onChange={onChange} id="email" placeholder="email" />
+<input type="phone" value={formData.phone} onChange={onChange} id="phone" placeholder="phone" />
+
+```
+
+- Example 2
+
+```JS
+const [data,setData] = useState({
+userEmail: "",
+title: "",
+progress: ""
+});
+
+const handleChange =(e)=>{
+
+const {name, value} = e.target;    //<--destructuring name and value from e.target
+setData(data=>(
+    ...data, [name] : value      //<--creating a copy of previous value from data using spread operator and adding new key value pair to the data useState
+));
+};
+
+<input type="email" required name="userEmail" value={data.userEmail} onChange={handleChange} />
+<input type="text" required maxLength={30} name="title" value={data.title} onChange={handleChange} />
+<input type="range" min="0" max="100" required name="progress" value={data.progress} onChange={handleChange} />
+```
+
+# 🎉 Event Handlers
+
+in React.js, onClick, onSubmit, and onChange are event handler props (often called event handlers for short).
+
+- it is a function that triggers in response to user actions (onClick, onChange, onSubmit, etc)
+- uses camelCase
+
+```JS
+const headleChange =()=>{
+  console.log("Button clicked");
+}
+
+//Can invoke the function using these examples:
+<input type="text" onChange={headleChange} />
+//OR
+<input type="text" onChange={()=>headleChange() } />
+```
+
+```JS
+//Option 1 (✅ Recommended)
+<input type="text" onChange={headleChange} />
+
+// Why this is better:
+
+// React automatically passes the event object to headleChange
+// No unnecessary function creation on each render
+// Cleaner and idiomatic React
+
+
+function headleChange(e) {
+  console.log(e.target.value);
+}
+
+// ✔ Best practice
+// ✔ Better performance
+// ✔ Access to the event
+```
+
+```JS
+// Option 2 (⚠ Works, but usually not needed)
+
+// What’s different:
+
+// You are creating a new function on every render
+// The event object is NOT passed unless you do it explicitly
+// Usually unnecessary unless you need extra logic or parameters
+// If you want the event here, you must write:
+
+
+
+<input type="text" onChange={(e) => headleChange(e)} />
+
+<input
+  type="text"
+  onChange={(e) => headleChange(e, "username")} />
+```
+
+# 🗒️ Forms
+
+```JS
+const ItemAdder =({setList})=>{
+
+const [newItem, setNewitem] = useState("");
+
+const handleSubmit =(event) =>{
+
+    event.preventDefault();    //<--prevent the form default behavious, won't refresh the web page and won't go to another web page, by invoking this function
+
+
+    setList((currList)=>{             ///<-- add new item to our list in App
+        return [newitem, ...currList];
+    });
+
+    setNewItem("");            //<-- reset the input to be empty, input conteiner will become empty after submitting data
+};
+
+
+return(
+<form onSubmit={hadleSubmit}>  //<--after pressing submit button, the form will be sent --> this will invoke the  hadleSubmit function
+
+    <label>
+        Add a new Item:
+        <input value={newItem} onChange={(event)=>setNewItem(event.target.value)} />
+    </lable>
+    <button type="submit"> Add item </button>         //<--submit button
+</form>
+);
+};
+```
+
+### ⭐ Most Common used EVENT HADLERS
+
+- onClick
+- onChange
+- onSubmit
+- onFocus
+- onBlur
+- onKeyDown
+- onMouseEnter / onMouseLeave
+- onScroll
+- and many others
+
+# 🔗 Link tags VS. anker tags
 
 - when use `<a>` tags, usually it uses to connect web pages togther, but by default it will upload new page --> which defeats one of the purposes of React and single page applications.
 - If you need a full page reload (e.g., for external links or to reset the entire application state), use the standard HTML `<a>` tag instead of `<Link>`.
@@ -1515,7 +1554,7 @@ react-router provide a path atribute --> "\*" , it means that it will show certa
 </ul>
 ```
 
-# React Context
+# 🌐 React Context
 
 - useContext - a hook to access global state without prop drilling
 - When we passing data through out the components in React, we hold our values in state and pass them between components using props. When we have big and complicated App , we can use state in few/ many components on various levels of nesting in our component trees. Therefore state is hold on higher levels (in App.js) and then passing down through different components - this is called props drilling.
@@ -1694,47 +1733,6 @@ return <ul>
 };
 
 );
-};
-```
-
-# Navigating Programmatically
-
-- react-router-dom in React Router will provide access to useNavigate hook, which allow navigate programatically , for example after form is submitted.
-
-The navigate function has 2 different argument types:
-
-- A string, which represent the "to" value (the same as with <Link to="/path" >)
-- A number, which represents how many steps forward (positive number) or backwards (negative number) you'd like to go in the browser's history (e.g navigate(-1 is the same as clicking the back button))
-
-THIS IS NOT A REPLACEMENT FOR <Link> components!!!
-
-Example
-
-```JS
-import {useNavigate} from 'react-router-dom';
-
-function MyComponent(){
-    const navigate = useNavigate();
-
-    function handleSubmit(e){
-        e.preventDefault();
-        doSomething()
-        .then(()=>{
-            navigate('/somewhere/else');
-        })
-        .catch((err)=>{
-            console.log(err);
-            //handle error
-        });
-    };
-
-
-    return(
-        <form onSubmit={handleSubmit} >
-            <label> Some msg </label>
-            <input />
-        </form>
-    );
 };
 ```
 
@@ -2626,9 +2624,5 @@ allComments.map(({ user, region, comments }, index) => (
     {region}
     {comments}
   }
-
-```
-
-```
 
 ```
